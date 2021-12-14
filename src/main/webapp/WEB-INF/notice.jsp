@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,30 +24,30 @@
         <main class="flex-shrink-0">
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html">Talk Talk</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="container px-5">
+                <a class="navbar-brand" href="/">Talk Talk</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="./index.html">홈</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
                         <li class="nav-item"><a class="nav-link" href="./portfolio-overview.html">카테고리</a></li>
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="./faq.html">공지사항</a></li>
-                                    <li><a class="dropdown-item" href="./faq.html">건의사항</a></li>
+                                    <li><a class="dropdown-item" href="javascript:notice();">공지사항</a></li>
+                                    <li><a class="dropdown-item" href="./proposal.html">건의사항</a></li>
                                 </ul>
                             </li>
                         <li class="nav-item"><a class="nav-link" href="./login.html">로그인</a></li>
                     </ul>
                 </div>
-                </div>
+            </div>
             </nav>
             <!-- Page Content-->
             <section class="py-5">
                 <div class="container px-5 my-5">
                     <div class="text-center mb-5">
-                        <h1 class="fw-bolder">Frequently Asked Questions</h1>
+                        <h1 class="fw-bolder">공지사항</h1>
                         <p class="lead fw-normal text-muted mb-0">How can we help you?</p>
                     </div>
                     <div class="row gx-5">
@@ -48,39 +55,19 @@
                             <!-- FAQ Accordion 1-->
                             <h2 class="fw-bolder mb-3">Account &amp; Billing</h2>
                             <div class="accordion mb-5" id="accordionExample">
+                            <c:forEach var="BoardList" items="${BoardList}" varStatus="status">
+                            <c:if test="${status.count eq '1'}"><c:set var="headingOne" value="headingOne" /><c:set var="collapseOne" value="collapseOne" /></c:if>
+                            <c:if test="${status.count eq '2'}"><c:set var="headingTwo" value="headingTwo" /><c:set var="collapseTwo" value="collapseTwo" /></c:if>
+                            <c:if test="${status.count eq '3'}"><c:set var="headingThree" value="headingThree" /><c:set var="collapseThree" value="collapseThree" /></c:if>
                                 <div class="accordion-item">
-                                    <h3 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Accordion Item #1</button></h3>
-                                    <div class="accordion-collapse collapse show" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <strong>This is the first item's accordion body.</strong>
-                                            It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-                                            <code>.accordion-body</code>
-                                            , though the transition does limit overflow.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h3 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Accordion Item #2</button></h3>
+                                    <h3 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">${BoardList.title}${status.count}</button></h3>
                                     <div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <strong>This is the second item's accordion body.</strong>
-                                            It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-                                            <code>.accordion-body</code>
-                                            , though the transition does limit overflow.
+                                            <strong>${BoardList.content}</strong>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h3 class="accordion-header" id="headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Accordion Item #3</button></h3>
-                                    <div class="accordion-collapse collapse" id="collapseThree" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <strong>This is the third item's accordion body.</strong>
-                                            It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-                                            <code>.accordion-body</code>
-                                            , though the transition does limit overflow.
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>                           
+                            </c:forEach>
                             </div>
                             <!-- FAQ Accordion 2-->
                         </div>
@@ -103,6 +90,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <a class="btn btn-primary" href="./wirteNotice.html">글쓰기</a>
                             </div>
                         </div>
                     </div>

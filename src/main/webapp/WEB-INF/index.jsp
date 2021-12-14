@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,6 +11,16 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <script>
+        function notice(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "notice"); //요청 보낼 주소
+            form.submit();
+        }
+        </script>
     </head>
     <body>
         <!-- Responsive navbar-->
