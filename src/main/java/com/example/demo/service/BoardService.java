@@ -29,11 +29,11 @@ public class BoardService {
 
 	}
 
-	public BoardVO getBoardDetail(Long idx) {
+	public BoardVO getBoardDetail(int idx) {
 		return boardDAO.selectBoardDetail(idx);
 	}
 
-	public void deleteBoard(Long idx) {
+	public void deleteBoard(int idx) {
 
 		BoardVO board = boardDAO.selectBoardDetail(idx);
 

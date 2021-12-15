@@ -60,10 +60,16 @@
                             <c:if test="${status.count eq '2'}"><c:set var="headingTwo" value="headingTwo" /><c:set var="collapseTwo" value="collapseTwo" /></c:if>
                             <c:if test="${status.count eq '3'}"><c:set var="headingThree" value="headingThree" /><c:set var="collapseThree" value="collapseThree" /></c:if>
                                 <div class="accordion-item">
-                                    <h3 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">${BoardList.title}${status.count}</button></h3>
+                                    <h3 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">${BoardList.title}</button></h3>
                                     <div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <strong>${BoardList.content}</strong>
+                                            <strong>${BoardList.content}
+                                            <input id="idx" name="idx" type="hidden" value="${BoardList.idx}">
+                                            <input id="NO" name="sign" type="hidden" value="update">
+                                            <div id="updateBtn" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer" onclick="update(this);">수정</div>
+                                            <input id="NO" name="sign" type="hidden" value="delete">
+                                            <div id="delBtn" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer" onclick="del(this);">삭제</div>
+                                            </strong>
                                         </div>
                                     </div>
                                 </div>                           
@@ -90,7 +96,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="btn btn-primary" href="./wirteNotice.html">글쓰기</a>
+                                <a class="btn btn-primary" href="./writeNotice.html">글쓰기</a>
                             </div>
                         </div>
                     </div>
@@ -105,5 +111,48 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+                <script>
+    	function del(btn){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "deleteNotice"); //요청 보낼 주소
+            var idx = btn.parentNode.childNodes[2].previousElementSibling;
+       		var hiddenField = document.createElement('input');
+       		hiddenField.setAttribute('type','hidden');
+       		hiddenField.setAttribute('name','idx');
+       		hiddenField.setAttribute('value',idx.value);
+       		form.appendChild(hiddenField);
+       	    if(confirm("삭제하시겠습니까 ?") == true){
+       	    	form.submit();
+       	        alert("삭제되었습니다");
+       	    }
+       	    else{
+       	    	alert("취소하셨습니다");
+       	        return ;
+       	    }
+   		}
+    	function update(btn){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "updateNotice"); //요청 보낼 주소
+            var idx = btn.parentNode.childNodes[2].previousElementSibling;
+       		var hiddenField = document.createElement('input');
+       		hiddenField.setAttribute('type','hidden');
+       		hiddenField.setAttribute('name','idx');
+       		hiddenField.setAttribute('value',idx.value);
+       		form.appendChild(hiddenField);
+       	    if(confirm("수정하시겠습니까 ?") == true){
+       	    	form.submit();
+       	    }
+       	    else{
+       	    	alert("취소하셨습니다");
+       	        return ;
+       	    }
+   		}
+        </script>
     </body>
 </html>

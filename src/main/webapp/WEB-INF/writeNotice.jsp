@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,11 +14,27 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-
-  	
-  	</script>        
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+	});
+	function submit(){
+		const title = $('#title').val();
+		const content = $('#content').val();
+		console.log(title);
+		console.log(content);
+		if ( title == "" || content =="" ) {
+			alert("글을 입력해주세요");
+			return 0;
+		}
+		const form = document.getElementById('contactForm');
+		
+		form.setAttribute('method','post');
+		form.setAttribute('action','../../registerNotice');
+		form.submit(); 
+		
+	}
+  </script>
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
@@ -47,7 +65,7 @@
                     <!-- Contact form-->
                     <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
-                            <h1 class="fw-bolder">Get in touch</h1>
+                            <h1 class="fw-bolder">공지사항</h1>
                             <p class="lead fw-normal text-muted mb-0">We'd love to hear from you</p>
                         </div>
                         <div class="row gx-5 justify-content-center">
@@ -59,18 +77,18 @@
                                 <!-- To make this form functional, sign up at-->
                                 <!-- https://startbootstrap.com/solution/contact-forms-->
                                 <!-- to get an API token!-->
-                                <form action="../login" method="post" class="joinForm">
+                                <form id="contactForm">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="name" type="text" placeholder="Enter your ID..." data-sb-validations="required" name="id"/>
-                                        <label for="name">Enter your ID</label>
-                                        <div class="invalid-feedback" data-sb-feedback="name:required">A ID is required.</div>
+                                        <input class="form-control" id="title" type="text" name="title" placeholder="Enter your name..." data-sb-validations="required" value="${board.title}"/>
+                                        <label for="name">Title</label>
+                                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                                     </div>
-                                    <!-- Email address input-->
+                                    <!-- Message input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="name" type="text" placeholder="Password" data-sb-validations="required" name="pw" />
-                                        <label for="name">Password</label>
-                                        <div class="invalid-feedback" data-sb-feedback="name:required">A Password is required.</div>
+                                        <textarea class="form-control" id="content" type="text" name="content" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required">${board.content}</textarea>
+                                        <label for="message">Content</label>
+                                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                                     </div>
                                     <!-- Submit success message-->
                                     <!---->
@@ -90,10 +108,12 @@
                                     <!-- an error submitting the form-->
                                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                                     <!-- Submit Button-->
-                                    <div class="d-grid" style="margin-bottom:15px;"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">로그인</button></div>
+                                    <div id="asd" class="d-grid" style="margin-bottom:15px;cursor:pointer;" onclick="submit();"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">등록</button></div>
                                     <div class="text-center mb-5">
-                                            <a class="nav-link" href="./contact.html">회원가입</a>
-                                            <a class="nav-link" href="#!">비밀번호 찾기</a>
+                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-twitter"></i></a>
+                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-facebook"></i></a>
+                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-linkedin"></i></a>
+                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-youtube"></i></a>
                                     </div>
                                 </form>
                             </div>

@@ -16,13 +16,13 @@ public interface BoardDAO {
 	public void insertBoard(BoardVO boardVO) throws DataAccessException; 
 
 
-	public BoardVO selectBoardDetail(Long idx); 
+	public BoardVO selectBoardDetail(int idx); 
 
 
 	public int updateBoard(BoardVO boardVO); 
 
 
-	public int deleteBoard(Long idx); 
+	public int deleteBoard(int idx); 
 
 
 	public List<BoardVO> selectBoardList(BoardVO boardVO); 

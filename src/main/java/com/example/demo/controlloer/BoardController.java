@@ -3,6 +3,7 @@ package com.example.demo.controlloer;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.service.BoardService;
 import com.example.demo.vo.BoardVO;
+import com.example.demo.vo.MemberVO;
 
 @Controller
 public class BoardController {
@@ -20,13 +22,30 @@ public class BoardController {
 	
 	@RequestMapping("registerNotice")
 	public String register(HttpServletRequest request, BoardVO boardVO,ModelMap model) {
-		System.out.println(boardVO);
 		System.out.println("insert");
 		int IDX = boardService.selectIdx();
 		boardVO.setIdx(IDX+1);
+		System.out.println(boardVO);
 		boardService.registerBoard(boardVO);
-		return "redirect:/";
+		return "notice";
 		}
+	
+	@RequestMapping("deleteNotice")
+	public String delete(HttpServletRequest request, BoardVO boardVO,ModelMap model) {
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		boardService.deleteBoard(idx);
+		List<BoardVO> BoardList = boardService.getBoardList(boardVO);
+		model.addAttribute("BoardList", BoardList);
+		return "notice";
+	}
+	
+	@RequestMapping("updateNotice")
+	public String update(HttpServletRequest request, BoardVO boardVO,ModelMap model) {
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		BoardVO board = boardService.getBoardDetail(idx);
+		model.addAttribute("board", board);
+		return "writeNotice";
+	}
 	
 	@RequestMapping("notice")
 	public String notice(HttpServletRequest request,ModelMap model,BoardVO boardVO) {
@@ -38,7 +57,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/")
-	public String main() {
+	public String main(HttpServletRequest request, HttpSession session, ModelMap model, MemberVO memberVO) {
+		session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("memberVO");
 		return "index";
 	}
 }
