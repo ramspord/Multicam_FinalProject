@@ -14,8 +14,8 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="memberVO">
-		insert into user(id,pw,email,phone_no)
-		values(#{id},#{pw},#{email},#{phone_no})
+		insert into user(id,pw,email,phone_no,user_type)
+		values(#{id},#{pw},#{email},#{phone_no},'U')
 	</insert>
 	
 	<update id="updateMemberPw" parameterType="memberVO">

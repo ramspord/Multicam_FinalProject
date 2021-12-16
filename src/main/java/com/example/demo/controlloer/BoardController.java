@@ -48,18 +48,41 @@ public class BoardController {
 	}
 	
 	@RequestMapping("notice")
-	public String notice(HttpServletRequest request,ModelMap model,BoardVO boardVO) {
+	public String notice(HttpServletRequest request,HttpSession session,ModelMap model,BoardVO boardVO,MemberVO memberVO) {
+		session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("memberVO");
+		System.out.println(memberVO);
 		System.out.println("notice.do");
 		List<BoardVO> BoardList = boardService.getBoardList(boardVO);
-		System.out.println(BoardList);
+		
+		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("BoardList", BoardList);
 		return "notice";
+	}
+	
+	@RequestMapping("proposal")
+	public String proposal(HttpServletRequest request,HttpSession session,ModelMap model,BoardVO boardVO,MemberVO memberVO) {
+		session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("memberVO");
+		System.out.println(memberVO);
+		System.out.println("proposal.do");
+		List<BoardVO> BoardList = boardService.getBoardList(boardVO);
+		
+		model.addAttribute("memberVO", memberVO);
+		model.addAttribute("BoardList", BoardList);
+		return "proposal";
 	}
 	
 	@RequestMapping("/")
 	public String main(HttpServletRequest request, HttpSession session, ModelMap model, MemberVO memberVO) {
 		session = request.getSession();
 		memberVO = (MemberVO) session.getAttribute("memberVO");
+		if(memberVO== null ) {
+			model.addAttribute("loginSign", "N");
+		}else {
+			model.addAttribute("loginSign", "Y");
+			model.addAttribute("session", memberVO.getId());
+		}
 		return "index";
 	}
 }

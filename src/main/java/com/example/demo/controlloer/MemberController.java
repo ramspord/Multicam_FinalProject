@@ -56,10 +56,12 @@ public class MemberController {
 		
 		try {
 			MemberVO vo=memberService.login(memberVO);
+			System.out.println("vo :"+vo);
 			if(vo!=null) {
-				session.setAttribute("memberVO", memberVO);
+				session.setAttribute("memberVO", vo);
 				jo.put("id", vo.getId());
 				jo.put("pw", vo.getPw());
+				jo.put("user_type", vo.getUser_type());
 				if(jo.size()>0) {
 					return "redirect:/";
 				}
@@ -74,14 +76,13 @@ public class MemberController {
 	}
 	
 	@PostMapping("logout")
-	@ResponseBody
 	public String logout(HttpSession session) {
 		JSONObject jo=new JSONObject();
 		
 		try {
 			session.invalidate();
 			
-			jo.put("msg", "완료");
+			return "redirect:/";
 		}catch(Exception e) {
 			jo.put("msg", e.getMessage());
 		}
