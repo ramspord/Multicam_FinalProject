@@ -56,6 +56,7 @@ public class MemberController {
 		
 		try {
 			MemberVO vo=memberService.login(memberVO);
+			System.out.println("ASD");
 			System.out.println("vo :"+vo);
 			if(vo!=null) {
 				session.setAttribute("memberVO", vo);
@@ -69,6 +70,7 @@ public class MemberController {
 				jo.put("msg", "id와 pw를 확인하세요");
 			}
 		}catch(DataAccessException e) {
+			System.out.println("zxc");
 			jo.put("msg", e.getMessage());
 		}		
 		

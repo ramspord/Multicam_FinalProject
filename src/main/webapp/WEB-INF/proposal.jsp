@@ -23,26 +23,7 @@
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-5">
-                <a class="navbar-brand" href="/">Talk Talk</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
-                        <li class="nav-item"><a class="nav-link" href="./portfolio-overview.html">카테고리</a></li>
-                        <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="javascript:notice();">건의사항</a></li>
-                                    <li><a class="dropdown-item" href="./proposal.html">건의사항</a></li>
-                                </ul>
-                            </li>
-                        <li class="nav-item"><a class="nav-link" href="./login.html">로그인</a></li>
-                    </ul>
-                </div>
-            </div>
-            </nav>
+            <jsp:include page="nav.jsp" flush="true"/>
             <!-- Page Content-->
             <section class="py-5">
                 <div class="container px-5 my-5">
@@ -53,7 +34,7 @@
                     <div class="row gx-5">
                         <div class="col-xl-8">
                             <!-- FAQ Accordion 1-->
-                            <h2 class="fw-bolder mb-3">Account &amp; Billing</h2>
+                            <h2 class="fw-bolder mb-3">글 목록</h2>
                             <div class="accordion mb-5" id="accordionExample">
                             <c:forEach var="BoardList" items="${BoardList}" varStatus="status">
                             <c:if test="${status.count eq '1'}"><c:set var="headingOne" value="headingOne" /><c:set var="collapseOne" value="collapseOne" /></c:if>
@@ -64,7 +45,7 @@
                                     <div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <strong>${BoardList.content}
-                                            <c:if test="${memberVO.user_type eq 'A' || memberVO.user_type eq 'U'}">
+                                            <c:if test="${memberVO.user_type eq 'A' || memberVO.user_no eq BoardList.user_no}">
 											<input id="idx" name="idx" type="hidden" value="${BoardList.idx}">
                                             <input id="NO" name="sign" type="hidden" value="update">
                                             <div id="updateBtn" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer" onclick="update(this);">수정</div>
@@ -99,7 +80,7 @@
                                     </div>
                                 </div>
                                 <c:if test="${memberVO.user_type eq 'A' || memberVO.user_type eq 'U'}">
-                                <a class="btn btn-primary" href="./writeNotice.html">글쓰기</a>
+                                <a class="btn btn-primary" href="./writeProposal.html">글쓰기</a>
                                 </c:if>
                             </div>
                         </div>

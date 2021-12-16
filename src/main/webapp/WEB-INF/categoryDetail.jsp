@@ -23,7 +23,8 @@
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <jsp:include page="nav.jsp" flush="true"/>
+<!--             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
                 <a class="navbar-brand" href="/">Talk Talk</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -42,7 +43,7 @@
                     </ul>
                 </div>
             </div>
-            </nav>
+            </nav> -->
             <!-- Page Content-->
             <section class="py-5">
                 <div class="container px-5 my-5">

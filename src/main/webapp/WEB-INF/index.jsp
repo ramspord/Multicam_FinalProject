@@ -16,44 +16,11 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        <script>
-        function category(){
-            var form = document.createElement("form");
-            document.body.appendChild(form);
-            form.setAttribute("charset", "UTF-8");
-            form.setAttribute("method", "Post");  //Post 방식
-            form.setAttribute("action", "category"); //요청 보낼 주소
-            form.submit();
-        }
-        function notice(){
-            var form = document.createElement("form");
-            document.body.appendChild(form);
-            form.setAttribute("charset", "UTF-8");
-            form.setAttribute("method", "Post");  //Post 방식
-            form.setAttribute("action", "notice"); //요청 보낼 주소
-            form.submit();
-        }
-        function proposal(){
-            var form = document.createElement("form");
-            document.body.appendChild(form);
-            form.setAttribute("charset", "UTF-8");
-            form.setAttribute("method", "Post");  //Post 방식
-            form.setAttribute("action", "proposal"); //요청 보낼 주소
-            form.submit();
-        }
-        function logout(){
-            var form = document.createElement("form");
-            document.body.appendChild(form);
-            form.setAttribute("charset", "UTF-8");
-            form.setAttribute("method", "Post");  //Post 방식
-            form.setAttribute("action", "logout"); //요청 보낼 주소
-            form.submit();
-        }
-        </script>
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <jsp:include page="nav.jsp" flush="true"/>
+<%--         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
                 <a class="navbar-brand" href="/">Talk Talk</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -84,7 +51,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --%>
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->

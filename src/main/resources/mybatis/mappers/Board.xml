@@ -9,6 +9,10 @@
 		select max(COALESCE(NO,1)) as NO FROM notice_board
 	</select>
 	
+	<select id="selectIdx2" resultType="int">
+		select IFNULL(max(COALESCE(NO,1)),1) as NO FROM proposal_board
+	</select>
+	
 	<insert id="insertBoard" parameterType="boardVO">
 	
 	<selectKey keyProperty="idx" resultType="int">
@@ -24,6 +28,25 @@
 			 ,#{title}
 			, #{content}
 			, now()
+		)
+	</insert>
+	
+		<insert id="insertProposal" parameterType="boardVO">
+	
+	<selectKey keyProperty="idx" resultType="int">
+	 select max(COALESCE(NO,1)) as NO FROM proposal_board
+	 </selectKey>
+	 	
+		insert into proposal_board
+		(
+		NO,title,content,registerDate,user_no
+		)values
+		(
+			#{idx}
+			 ,#{title}
+			, #{content}
+			, now()
+			,#{user_no}
 		)
 	</insert>
 	
@@ -56,8 +79,6 @@
 		registerDate,
 		count
 		 from notice_board
-			
-			
 	</select>
 			
 	<select id="selectBoardTotalCount" parameterType="boardVO" resultType="int">
@@ -65,5 +86,23 @@
 			COUNT(*)
 		FROM
 			notice_board
-	</select>			
+	</select>		
+	
+	 	<select id="selectProposalList" parameterType="boardVO" resultType="boardVO">
+		select 
+		NO as idx,
+		user_no,
+		title,
+		content,
+		registerDate,
+		count
+		 from proposal_board
+	</select>
+			
+	<select id="selectProposalTotalCount" parameterType="boardVO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			proposal_board
+	</select>		
 </mapper>
