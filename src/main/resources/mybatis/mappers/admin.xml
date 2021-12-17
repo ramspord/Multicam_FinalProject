@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.AdminPageDAO">
+	
+     <!-- admin 창에서 멤버삭제 -->
+     <delete id="memberDelete" parameterType="memberVO">
+	    delete from user where user_no=#{user_no}
+    </delete>
+    
+     <!-- admin 창에서 멤버삭제 -->
+     <delete id="boardDelete" parameterType="BoardVO">
+	    delete from proposal_board where no=#{no}
+    </delete>
+    
+        <!-- 어드민페이지->회원관리페이지->회원리스트 불러오기 -->
+    <select id="memberList" resultType="MemberVO">
+	    select * from user
+    </select>
+	
+	 <!-- 어드민페이지->회원관리페이지->수정폼 -->
+    <select id="memberUpdateForm" parameterType="MemberVO" resultType="MemberVO">
+	    SELECT * FROM user WHERE user_no=#{user_no};
+    </select>
+	
+	<!-- 어드민페이지->게시판관리페이지 리스트 -->
+	<select id="boardList" resultType="BoardVO">
+	    SELECT * FROM proposal_board;
+    </select>
+    
+    
+	<update id="memberUpdate" parameterType="memberVO">
+	    update user 
+		set id=#{id}, email=#{email}, phone_no=#{phone_no}, pw=#{pw}
+		where user_no=#{user_no}
+    </update>
+	
+	
+	
+	
+	<!-- 회원가입 -->
+	<insert id="memberJoin" parameterType="memberVO">
+	    insert into member(no, id,name,pw,email,phone)
+        values(member_no.NEXTVAL, #{id},#{name},#{pw},#{email},#{phone})
+    </insert>   
+    
+
+    
+
+
+</mapper>  

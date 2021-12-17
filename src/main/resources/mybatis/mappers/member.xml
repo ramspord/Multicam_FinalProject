@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MemberDAO">
+	
+	<!-- 회원가입 -->
+	<insert id="memberJoin" parameterType="memberVO">
+	    insert into member(no, id,name,pw,email,phone)
+        values(member_no.NEXTVAL, #{id},#{name},#{pw},#{email},#{phone})
+    </insert>
+			
+	<!-- 로그인 -->
+	<select id="login" parameterType="memberVO" resultType="memberVO">
+		select * from user where id=#{id} and pw=#{pw}
+    </select>
+    
+    <select id="selectAllMember" resultType="memberVO">
+	    select * from member_courier
+    </select>
+    
+    <update id="updateMemberPw" parameterType="memberVO">
+	    update member_courier set pw=#{pw} where id=#{id}
+    </update>
+    <delete id="deleteMember" parameterType="String">
+	    delete from member_courier where id=#{id}
+    </delete>
+</mapper>  
