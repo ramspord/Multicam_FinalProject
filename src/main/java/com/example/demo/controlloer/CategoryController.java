@@ -41,6 +41,7 @@ public class CategoryController {
 	public String categoryDetail(HttpServletRequest request, CategoryVO categoryVO,ModelMap model,HttpSession session, MemberVO memberVO) {
 		session = request.getSession();
 		memberVO = (MemberVO) session.getAttribute("memberVO");
+		System.out.println(memberVO);
 		if(memberVO== null ) {
 			model.addAttribute("loginSign", "N");
 		}else {
