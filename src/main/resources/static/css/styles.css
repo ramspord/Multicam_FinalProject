@@ -76,6 +76,10 @@
   }
 }
 
+.id_ok{color:#FF00FF; display: none;}
+.id_already{color:#6A82FB; display: none;}
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
