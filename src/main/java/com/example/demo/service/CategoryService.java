@@ -21,8 +21,21 @@ public class CategoryService {
 		return List;
 	}
 	
-	public ArrayList<CategoryVO> selectCategoryDetail(String place) {
-		ArrayList<CategoryVO> List = categoryDAO.selectCategoryDetail(place);
+	public ArrayList<CategoryVO> selectCategoryDetail(String place,String user_no) {
+		ArrayList<CategoryVO> List = null;
+		if(user_no.equals("2")) {
+			List = categoryDAO.selectCategoryDetailAdmin(place);
+		}else {
+			List = categoryDAO.selectCategoryDetail(place,user_no);			
+		}
 		return List;
+	}
+	
+	public void addUserText(CategoryVO categoryVO) {
+		categoryDAO.addUserText(categoryVO);
+	}
+	
+	public void deleteUserText(CategoryVO categoryVO) {
+		categoryDAO.deleteUserText(categoryVO);
 	}
 }

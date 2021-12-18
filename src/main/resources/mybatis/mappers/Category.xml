@@ -10,8 +10,19 @@
 	</select>
 	
 	<select id="selectCategoryDetail" parameterType="string" resultType="categoryVO">
-			SELECT * FROM category_text WHERE place= #{place}
+			SELECT * FROM category_text WHERE (place= #{place} and user_no = #{user_no}) or (place = #{place} and user_no = 2) order by user_no
+	</select>
+	
+		<select id="selectCategoryDetailAdmin" parameterType="string" resultType="categoryVO">
+			SELECT * FROM category_text WHERE place= #{place} order by user_no
 	</select>	
 	
-			
+	<insert id="addUserText" parameterType="categoryVO">
+		insert into category_text (place, place_text, user_no) 
+		values(#{place},#{place_text},#{user_no})
+	</insert>
+	
+	<delete id="deleteUserText" parameterType="categoryVO">
+		delete from category_text where user_no = #{user_no} and place = #{place} and place_text = #{place_text}
+	</delete>			
 </mapper>
