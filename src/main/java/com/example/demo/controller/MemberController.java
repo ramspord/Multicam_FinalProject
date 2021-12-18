@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemberService;
+import com.example.demo.service.UserSha256;
 import com.example.demo.vo.MemberVO;
 
 @Controller
@@ -25,14 +26,18 @@ public class MemberController {
 	MemberService memberService;
 	
 	@PostMapping("contact")
-	public String contact(HttpServletRequest request, MemberVO memberVO) {
+	public String contact(HttpServletRequest request, MemberVO memberVO) {  
 		
 		System.out.println("회원가입 폼 넘어온 값 "+memberVO);
+		
+		String encryPassword = UserSha256.encrypt(memberVO.getPw());
+		memberVO.setPw(encryPassword);
+		System.out.println(memberVO.getPw());
 		
 		if(memberVO.getId() ==null || memberVO.getId().equals("") || 
 				memberVO.getPw()==null || memberVO.getPw().equals("") 
 				|| memberVO.getName()==null || memberVO.getName().equals("")) {
-			
+			System.out.println("여기서 오류");
 			return "바";
 		}
 		
@@ -41,6 +46,7 @@ public class MemberController {
 			memberService.contact(memberVO);
 			return "index";
 		}catch(DataAccessException e) {
+			System.out.println(e.getMessage());
 			return "ok";
 		}
 	}

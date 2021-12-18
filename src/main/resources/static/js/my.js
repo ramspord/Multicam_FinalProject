@@ -111,25 +111,27 @@ $(document).ready(function(){
 				
 		// 비밀번호가 같은 경우 && 비밀번호 정규식
 		if (($('#pw').val() == ($('#pwd').val()))
-				&& pwJ.test($('#pw').val())) {
-					
+				&& pwJ.test($('#pw').val())) {	
 			inval_Arr[0] = true;
 		} else {
 			inval_Arr[0] = false;
 		}
+		
 		// 이름 정규식
 		if (nameJ.test($('#name').val())) {
 			inval_Arr[1] = true;	
 		} else {
 			inval_Arr[1] = false;
 		}
+		
 		// 이메일 정규식
 		if (emailJ.test($('#email').val())){
-			console.log(phoneJ.test($('#email').val()));
+			console.log(emailJ.test($('#email').val()));
 			inval_Arr[2] = true;
 		} else {
 			inval_Arr[2] = false;
 		}
+		
 		// 휴대폰번호 정규식
 		if (phonenoJ.test($('#phone_no').val())) {
 			console.log(phoneJ.test($('#phone_no').val()));
@@ -148,7 +150,7 @@ $(document).ready(function(){
 		}
 		
 		if(validAll){ // 유효성 모두 통과
-			alert('인증 이메일이 전송되었습니다');
+			alert('회원가입이 정상적으로 처리되었습니다');
 			
 		} else{
 			alert('입력 정보를 확인해주세요')
@@ -158,6 +160,7 @@ $(document).ready(function(){
 
 		
 });
+
 function logout(){
 	var form = document.createElement("form");
 	document.body.appendChild(form);
