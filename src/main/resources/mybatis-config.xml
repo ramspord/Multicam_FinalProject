@@ -9,6 +9,5 @@
 	<mapper resource="mybatis/mappers/Board.xml"/>
 	<mapper resource="mybatis/mappers/member.xml"/>
 	<mapper resource="mybatis/mappers/Category.xml"/>
-
 	</mappers>
 </configuration>
