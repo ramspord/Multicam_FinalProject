@@ -10,11 +10,9 @@ import com.example.demo.vo.MemberVO;
 @Service
 public class MemberService {
 	
-	
-	
 	@Autowired
 	MemberDAO memberDAO;
-	
+
 	public void contact(MemberVO memberVO) throws DataAccessException{
 		memberDAO.insertMember(memberVO);
 	}
@@ -24,3 +22,4 @@ public class MemberService {
 	}
 
 }
+

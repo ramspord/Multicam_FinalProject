@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,7 +23,8 @@
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <jsp:include page="nav.jsp" flush="true"/>
+<!--             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
                 <a class="navbar-brand" href="/">Talk Talk</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -35,8 +43,7 @@
                     </ul>
                 </div>
             </div>
-
-            </nav>
+            </nav> -->
             <!-- Page Content-->
             <section class="py-5">
                 <div class="container px-5 my-5">
@@ -44,8 +51,24 @@
                         <div class="col-lg-3">
                             <div class="d-flex align-items-center mt-lg-5 mb-4">
                                 <div class="ms-3">
-                                    <div class="fw-bold">식당</div>
+                                <c:choose>
+                            	<c:when test="${placeDetail eq '공항'}">
+                            	<div class="fw-bold">공항</div>
                                     <div class="text-muted">News, Business</div>
+                            	</c:when>
+                            	<c:when test="${placeDetail eq '병원'}">
+								<div class="fw-bold">병원</div>
+                                    <div class="text-muted">News, Business</div>
+                            	</c:when>
+                            	<c:when test="${placeDetail eq '식당'}">
+								<div class="fw-bold">식당</div>
+                                    <div class="text-muted">News, Business</div>
+                            	</c:when>
+                            	<c:otherwise>
+                            	<div class="fw-bold">영화관</div>
+                                    <div class="text-muted">News, Business</div>
+                            	</c:otherwise>
+                            	</c:choose>                                
                                 </div>
                             </div>
                         </div>
@@ -63,7 +86,20 @@
                                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
                                 </header>
                                 <!-- Preview image figure-->
-                                <figure class="mb-4"><img class="img-fluid rounded-3 mb-3" src="./images/식당.jpg" alt="..." /></figure>
+                                <c:choose>
+                            	<c:when test="${placeDetail eq '공항'}">
+                            	<figure class="mb-4"><img class="img-fluid rounded-3 mb-3" src="./images/공항.jpg" alt="..." /></figure>
+                            	</c:when>
+                            	<c:when test="${placeDetail eq '병원'}">
+								<figure class="mb-4"><img class="img-fluid rounded-3 mb-3" src="./images/병원.jpg" alt="..." /></figure>
+                            	</c:when>
+                            	<c:when test="${placeDetail eq '식당'}">
+								<figure class="mb-4"><img class="img-fluid rounded-3 mb-3" src="./images/식당.jpg" alt="..." /></figure>
+                            	</c:when>
+                            	<c:otherwise>
+                            	<figure class="mb-4"><img class="img-fluid rounded-3 mb-3" src="./images/영화관.jpg" alt="..." /></figure>
+                            	</c:otherwise>
+                            	</c:choose>
                                 <!-- Post content-->
                             </article>
                             <!-- Comments section-->
@@ -71,54 +107,23 @@
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <!-- Single comment-->
+                                        <c:forEach var="categoryDetail" items="${categoryDetail}" varStatus="status">
                                         <div class="d-flex">
-                                            <div class="flex-shrink-0"><i class="bi bi-megaphone"></i></div>
+                                            <div class="flex-shrink-0" style="cursor:pointer;"><i class="bi bi-megaphone"></i></div>
                                             <div class="ms-3">
-                                                <div class="fw-bold">메뉴판 좀 주세요
+                                                <div class="fw-bold">${categoryDetail.place_text}
                                                 </div>
                                             </div>
                                                 <div style="margin-left: auto; text-align: center;">
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">수정</div>
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">삭제</div>
+                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">수정</div>
+                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">삭제</div>
                                                 </div>                                            
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0"><i class="bi bi-megaphone"></i></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">계산 좀 해주세요
-                                                </div>
-                                            </div>
-                                                <div style="margin-left: auto; text-align: center;">
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">수정</div>
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">삭제</div>
-                                                </div>                                            
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0"><i class="bi bi-megaphone"></i></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">화장실이 어디인가요?
-                                                </div>
-                                            </div>
-                                                <div style="margin-left: auto; text-align: center;">
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">수정</div>
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">삭제</div>
-                                                </div>                                            
-                                        </div>                                       
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0"><i class="bi bi-megaphone"></i></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">예약 가능한가요?
-                                                </div>
-                                            </div>
-                                                <div style="margin-left: auto; text-align: center;">
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">수정</div>
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">삭제</div>
-                                                </div>                                            
-                                        </div>
+                                        </div>                                        
+                                        </c:forEach>
 										<!-- Comment form-->
                                         <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!" style="margin-top:15px"></textarea></form>
 												<div style="margin-left: auto; text-align: center;">
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">추가</div>
+                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">추가</div>
                                                 </div>  
                                     </div>
                                 </div>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.demo.dao.BoardDAO">
+
+	<select id="selectIdx" resultType="int">
+		select max(COALESCE(NO,1)) as NO FROM notice_board
+	</select>
+	
+	<select id="selectIdx2" resultType="int">
+		select IFNULL(max(COALESCE(NO,1)),1) as NO FROM proposal_board
+	</select>
+	
+	<insert id="insertBoard" parameterType="boardVO">
+	
+	<selectKey keyProperty="idx" resultType="int">
+	 select max(COALESCE(NO,1)) as NO FROM notice_board
+	 </selectKey>
+	 	
+		insert into notice_board
+		(
+		NO,title,content,registerDate
+		)values
+		(
+			#{idx}
+			 ,#{title}
+			, #{content}
+			, now()
+		)
+	</insert>
+	
+		<insert id="insertProposal" parameterType="boardVO">
+	
+	<selectKey keyProperty="idx" resultType="int">
+	 select max(COALESCE(NO,1)) as NO FROM proposal_board
+	 </selectKey>
+	 	
+		insert into proposal_board
+		(
+		NO,title,content,registerDate,user_no
+		)values
+		(
+			#{idx}
+			 ,#{title}
+			, #{content}
+			, now()
+			,#{user_no}
+		)
+	</insert>
+	
+	<select id="selectBoardDetail" parameterType="int" resultType="boardVO">
+		select * from notice_board where NO=#{idx}
+	</select>
+	
+	<update id="updateBoard" parameterType="boardVO">
+		update t_board
+			set
+				update_time = sysdate
+				, title = #{title}
+				, content = #{content}
+				, writer = #{writer}
+				, notice_yn = NVL(#{noticeYn}, 'N')
+				, secret_yn = NVL(#{secretYn}, 'N')
+			WHERE
+				idx = #{idx}
+	</update>
+	
+	<update id="deleteBoard" parameterType="int">
+		delete from notice_board WHERE NO = #{idx}
+	</update>
+	
+ 	<select id="selectBoardList" parameterType="boardVO" resultType="boardVO">
+		select 
+		NO as idx,
+		title,
+		content,
+		registerDate,
+		count
+		 from notice_board
+	</select>
+			
+	<select id="selectBoardTotalCount" parameterType="boardVO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			notice_board
+	</select>		
+	
+	 	<select id="selectProposalList" parameterType="boardVO" resultType="boardVO">
+		select 
+		NO as idx,
+		user_no,
+		title,
+		content,
+		registerDate,
+		count
+		 from proposal_board
+	</select>
+			
+	<select id="selectProposalTotalCount" parameterType="boardVO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			proposal_board
+	</select>		
+</mapper>
