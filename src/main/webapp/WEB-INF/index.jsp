@@ -115,10 +115,10 @@
 		<center>
             <div class="align-items-center my-4">
                 <div class="col-lg-7">
-					<h3 class="font-weight-light">상대방에게 노트하듯 다가가보세요</h3>
+					<h3 class="font-weight-light">똑똑 노크하듯 다가가보세요</h3>
 						<div class="input-div">
 							<div>
-								<textarea class="img-fluid rounded mb-4 mb-lg-0" autofocus="" placeholder="&#13;&#10; &#13;&#10; 내용을 입력하세요." id="text" maxlength="184" rows="1" cols="184" style="width: 100%;height: 8em; resize: none;" spellcheck="false"></textarea>
+								<textarea class="img-fluid rounded mb-0 mb-lg-0" autofocus="" placeholder="&#13;&#10; &#13;&#10; 내용을 입력하세요." id="text" maxlength="184" rows="1" cols="184" style="width: 100%;height: 8em; resize: none;" spellcheck="false"></textarea>
 							</div>
 
 						<button id="ttsBtn"><img src="../images/스피커.png" id="speaker" width="50"></button>

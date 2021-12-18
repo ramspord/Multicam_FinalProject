@@ -17,11 +17,11 @@ public class OpenApiController {
 	
 	@Autowired
 	Tts tts;
-	
+
 	@RequestMapping("tts")
 	@ResponseBody
 	public String tts(String text) {
-		String name=tts.tts(text);
+		String name =tts.convertToSoundFileName(text);
 		return name;
 	}
 

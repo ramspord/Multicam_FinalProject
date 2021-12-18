@@ -22,7 +22,7 @@ public class Tts {
 	@Value("${naverAi.clientSecret}")
 	private String clientSecret;
 
- public String tts(String text) {
+ public String convertToSoundFileName(String text) {
      
      try {
          text = URLEncoder.encode(text, "UTF-8"); // 13자
@@ -53,8 +53,9 @@ public class Tts {
             		 System.gc();
             		 System.out.println(oldFile.delete());
             	 }
+            	 
              }
-             
+
              String tempname = Long.valueOf(new Date().getTime()).toString();
              oldName=tempname;
              File f = new File("src\\main\\webapp\\media\\"+tempname+".mp3");

@@ -13,27 +13,14 @@
 <meta name="author" content="" />
 <title>Talk Talk</title>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 	<!-- Favicon-->
 		<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 	<!-- Bootstrap icons-->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 		<link href="css/styles.css" rel="stylesheet" />
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#ttsBtn").click(function(){
-				const text=$("#categoryDetail.place_text").val();
-				$.post('../tts',{text},function(fileName){
-					//alert(data);
-					const audio=new Audio("../media/"+fileName+".mp3");
-					audio.play();
-				})
-			});
-		});
-	</script>
 
 </head>
 <body class="d-flex flex-column">
@@ -124,7 +111,7 @@
                                         <!-- Single comment-->
                                         <c:forEach var="categoryDetail" items="${categoryDetail}" varStatus="status">
                                         <div class="d-flex">
-                                            <div class="flex-shrink-0" style="cursor:pointer;"><i class="bi bi-megaphone" id="ttsBtn"></i></div>
+                                            <div class="flex-shrink-0" style="cursor:pointer;"><i class="bi bi-megaphone" id="ttsMgphone"></i></div>
                                             <div class="ms-3">
                                                 <div class="fw-bold">${categoryDetail.place_text}
                                                 </div>
