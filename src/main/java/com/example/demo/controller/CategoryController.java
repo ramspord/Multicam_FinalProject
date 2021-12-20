@@ -51,6 +51,7 @@ public class CategoryController {
 			model.addAttribute("loginSign", "Y");
 			model.addAttribute("session", memberVO);
 		}
+
 		String place = request.getParameter("place");
 		ArrayList<CategoryVO> List =  categoryService.selectCategoryDetail(place,user_no);
 		System.out.println(List);

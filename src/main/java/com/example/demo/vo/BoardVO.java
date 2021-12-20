@@ -3,6 +3,7 @@ package com.example.demo.vo;
 import java.time.LocalDateTime;
 
 public class BoardVO {
+
 	private String user_no;
 	
 	public String getUser_no() {
@@ -38,6 +39,7 @@ public class BoardVO {
 	public String toString() {
 		return "BoardVO [user_no=" + user_no + ", idx=" + idx + ", title=" + title + ", content=" + content
 				+ ", insertTime=" + insertTime + ", count=" + count + "]";
+
 	}
 
 	public int getIdx() {

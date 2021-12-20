@@ -12,6 +12,7 @@ import com.example.demo.vo.BoardVO;
 @Repository
 public interface BoardDAO {
 	public int selectIdx();
+
 	public int selectIdx2();
 	
 	public void insertBoard(BoardVO boardVO) throws DataAccessException; 
@@ -37,4 +38,5 @@ public interface BoardDAO {
 
 
 	public int selectProposalTotalCount(); 
+
 }

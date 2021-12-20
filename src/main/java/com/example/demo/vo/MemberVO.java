@@ -1,7 +1,7 @@
 package com.example.demo.vo;
 
 public class MemberVO {
-	
+
 	private String user;
 	private String id,pw,name,email,phone_no,user_no;
 	private String user_type = "U";
@@ -94,5 +94,7 @@ public class MemberVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
+
 }
+

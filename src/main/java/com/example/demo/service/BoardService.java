@@ -18,7 +18,7 @@ public class BoardService {
 		int idx = boardDAO.selectIdx();
 		return idx;
 	}
-	
+
 	public int selectIdx2() {
 		int idx = boardDAO.selectIdx2();
 		return idx+1;
@@ -84,6 +84,7 @@ public class BoardService {
 
 		if (boardTotalCount > 0) {
 			boardList = boardDAO.selectProposalList(boardVO);
+
 		}
 
 		return boardList;

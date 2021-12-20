@@ -21,6 +21,7 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping("registerNotice")
+
 	public String registerNotice(HttpServletRequest request, BoardVO boardVO,ModelMap model,HttpSession session,MemberVO memberVO) {
 		session = request.getSession();
 		memberVO = (MemberVO) session.getAttribute("memberVO");
@@ -100,4 +101,19 @@ public class BoardController {
 		return "../proposal";
 	}
 	
+
+	@RequestMapping("/")
+	public String main(HttpServletRequest request, HttpSession session, ModelMap model, MemberVO memberVO) {
+		session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("memberVO");
+		if(memberVO== null ) {
+			model.addAttribute("loginSign", "N");
+		}else {
+			model.addAttribute("loginSign", "Y");
+			model.addAttribute("session", memberVO);
+
+		}
+		return "index";
+	}
+
 }

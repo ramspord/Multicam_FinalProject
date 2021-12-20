@@ -17,6 +17,18 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
+    	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#ttsBtn").click(function(){
+				const text=$("#text").val();
+				$.post('../tts',{text},function(fileName){
+					//alert(data);
+					const audio=new Audio("../media/"+fileName+".mp3");
+					audio.play();
+				})
+			});
+		});
+	</script>
     <body>
         <!-- Responsive navbar-->
         <jsp:include page="nav.jsp" flush="true"/>
