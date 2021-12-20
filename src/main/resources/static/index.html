@@ -44,6 +44,7 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
                         <li class="nav-item"><a class="nav-link" href="./portfolio-overview.html">카테고리</a></li>
                         <li class="nav-item dropdown">
@@ -53,11 +54,25 @@
                                     <li><a class="dropdown-item" href="./proposal.html">건의사항</a></li>
                                 </ul>
                             </li>
+
                         <li class="nav-item"><a class="nav-link" href="./login.html">로그인</a></li>
                     </ul>
+                     <input  type="button" value="야간" onclick="
+								var target = document.querySelector('body'); 
+								if(this.value === '야간'){
+								target.style.backgroundColor= 'dimgray';
+								target.style.color='white';
+								this.value ='주간';
+								}else{
+								target.style.backgroundColor= 'white';
+								target.style.color='dimgray';
+								this.value ='야간';
+								}
+						">
                 </div>
             </div>
         </nav>
+<<<<<<< HEAD
 	<!-- Page Content-->
 		<div class="container px-4 px-lg-5">
 	<!-- Heading Row-->

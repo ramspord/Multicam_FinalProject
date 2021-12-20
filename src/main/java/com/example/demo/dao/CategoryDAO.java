@@ -13,5 +13,8 @@ import com.example.demo.vo.CategoryVO;
 @Repository
 public interface CategoryDAO {
 	public List<CategoryVO> selectCategory() throws DataAccessException;
-	public ArrayList<CategoryVO> selectCategoryDetail(String place) throws DataAccessException;
+	public ArrayList<CategoryVO> selectCategoryDetail(String place,String user_no) throws DataAccessException;
+	public ArrayList<CategoryVO> selectCategoryDetailAdmin(String place) throws DataAccessException;
+	public void addUserText(CategoryVO categoryVO) throws DataAccessException;
+	public void deleteUserText(CategoryVO categoryVO) throws DataAccessException;
 }

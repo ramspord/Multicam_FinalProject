@@ -24,26 +24,6 @@
         <main class="flex-shrink-0">
             <!-- Navigation-->
             <jsp:include page="nav.jsp" flush="true"/>
-<!--             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-5">
-                <a class="navbar-brand" href="/">Talk Talk</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
-                        <li class="nav-item"><a class="nav-link" href="./portfolio-overview.html">카테고리</a></li>
-                        <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="javascript:notice();">공지사항</a></li>
-                                    <li><a class="dropdown-item" href="./proposal.html">건의사항</a></li>
-                                </ul>
-                            </li>
-                        <li class="nav-item"><a class="nav-link" href="./login.html">로그인</a></li>
-                    </ul>
-                </div>
-            </div>
-            </nav> -->
             <!-- Page Content-->
             <section class="py-5">
                 <div class="container px-5 my-5">
@@ -53,19 +33,19 @@
                                 <div class="ms-3">
                                 <c:choose>
                             	<c:when test="${placeDetail eq '공항'}">
-                            	<div class="fw-bold">공항</div>
+                            	<div class="fw-bold" id="place">공항</div>
                                     <div class="text-muted">News, Business</div>
                             	</c:when>
                             	<c:when test="${placeDetail eq '병원'}">
-								<div class="fw-bold">병원</div>
+								<div class="fw-bold" id="place">병원</div>
                                     <div class="text-muted">News, Business</div>
                             	</c:when>
                             	<c:when test="${placeDetail eq '식당'}">
-								<div class="fw-bold">식당</div>
+								<div class="fw-bold" id="place">식당</div>
                                     <div class="text-muted">News, Business</div>
                             	</c:when>
                             	<c:otherwise>
-                            	<div class="fw-bold">영화관</div>
+                            	<div class="fw-bold" id="place">영화관</div>
                                     <div class="text-muted">News, Business</div>
                             	</c:otherwise>
                             	</c:choose>                                
@@ -104,6 +84,7 @@
                             </article>
                             <!-- Comments section-->
                             <section>
+                            <input type="hidden" name="user_no" id="user_no" value="${session.user_no }"/>
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <!-- Single comment-->
@@ -114,17 +95,21 @@
                                                 <div class="fw-bold">${categoryDetail.place_text}
                                                 </div>
                                             </div>
-                                                <div style="margin-left: auto; text-align: center;">
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">수정</div>
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">삭제</div>
-                                                </div>                                            
+                                            <c:if test="${session.user_no eq 2 ||categoryDetail.user_no eq session.user_no}">
+                                            	<div style="margin-left: auto; text-align: center;">
+                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="updateUserText(this);">수정</div>
+                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="deleteUserText(this);">삭제</div>
+                                                </div>
+                                            </c:if>
                                         </div>                                        
                                         </c:forEach>
 										<!-- Comment form-->
-                                        <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!" style="margin-top:15px"></textarea></form>
+                                        <form class="mb-4" id="form">
+                                        <textarea id="userText" class="form-control" rows="3" placeholder="Join the discussion and leave a comment!" style="margin-top:15px"></textarea>
 												<div style="margin-left: auto; text-align: center;">
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">추가</div>
-                                                </div>  
+                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="addUserText();">추가</div>
+                                                </div>
+                                         </form>  
                                     </div>
                                 </div>
                             </section>
@@ -152,5 +137,42 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        function addUserText(){
+        	const text = $('#userText').val();
+        	const place = $('#place').text();
+        	console.log(place);
+        	if(confirm("추가하시겠습니까 ?")==true){
+        		$.post('../addUserText',{place,text},function(){
+        			alert("추가하셨습니다.");
+    				location.reload();
+    			});        		
+        	}else{
+        		alert("취소하셨습니다.")
+        	}
+        }
+        function updateUserText(){
+        	const text = $('#userText').val();
+        	const place = $('#place').text();
+        	console.log(place);
+			$.post('../updateUserText',{place,text},function(){
+				console.log("asd");
+			});
+        }
+        function deleteUserText(btn){
+        	const text = btn.parentNode.previousElementSibling.childNodes[1].innerText;
+        	const user_no = $('#user_no').val();
+        	const place = $('#place').text();
+        	if(confirm("삭제하시겠습니까 ?")==true){
+        		$.post('../deleteUserText',{place,user_no,text},function(){
+    				alert("삭제하셨습니다.");
+    				location.reload();
+    			});
+        	}else{
+        		alert("취소하셨습니다.");
+        	}
+        }
+        </script>
     </body>
 </html>

@@ -22,13 +22,16 @@ public class BoardController {
 	
 	@RequestMapping("registerNotice")
 
-	public String registerNotice(HttpServletRequest request, BoardVO boardVO,ModelMap model) {
+	public String registerNotice(HttpServletRequest request, BoardVO boardVO,ModelMap model,HttpSession session,MemberVO memberVO) {
+		session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("memberVO");
+		
 		System.out.println("insert");
 		int IDX = boardService.selectIdx();
 		boardVO.setIdx(IDX+1);
 		System.out.println(boardVO);
 		boardService.registerBoard(boardVO);
-		return "notice";
+		return "../notice";
 		}
 	
 	@RequestMapping("registerProposal")
@@ -49,7 +52,7 @@ public class BoardController {
 		boardService.deleteBoard(idx);
 		List<BoardVO> BoardList = boardService.getBoardList(boardVO);
 		model.addAttribute("BoardList", BoardList);
-		return "notice";
+		return "../notice";
 	}
 	
 	@RequestMapping("updateNotice")
@@ -57,7 +60,7 @@ public class BoardController {
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		BoardVO board = boardService.getBoardDetail(idx);
 		model.addAttribute("board", board);
-		return "writeNotice";
+		return "../writeNotice";
 	}
 	
 	@RequestMapping("notice")
@@ -75,7 +78,7 @@ public class BoardController {
 		
 		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("BoardList", BoardList);
-		return "notice";
+		return "../notice";
 	}
 	
 	@RequestMapping("proposal")
@@ -95,9 +98,10 @@ public class BoardController {
 		
 		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("BoardList", BoardList);
-		return "proposal";
+		return "../proposal";
 	}
 	
+
 	@RequestMapping("/")
 	public String main(HttpServletRequest request, HttpSession session, ModelMap model, MemberVO memberVO) {
 		session = request.getSession();
@@ -111,4 +115,5 @@ public class BoardController {
 		}
 		return "index";
 	}
+
 }
