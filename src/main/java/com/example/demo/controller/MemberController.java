@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,6 +36,8 @@ public class MemberController {
 		memberVO.setPw(encryPassword);
 		System.out.println(memberVO.getPw());
 		
+	
+		
 		if(memberVO.getId() ==null || memberVO.getId().equals("") || 
 				memberVO.getPw()==null || memberVO.getPw().equals("") 
 				|| memberVO.getName()==null || memberVO.getName().equals("")) {
@@ -63,6 +67,9 @@ public class MemberController {
 			return jo.toJSONString();
 		}
 		
+		String encryPassword = UserSha256.encrypt(memberVO.getPw());
+		memberVO.setPw(encryPassword);
+		System.out.println(memberVO.getPw());
 		
 		try {
 			MemberVO vo=memberService.login(memberVO);
@@ -114,6 +121,22 @@ public class MemberController {
 		return "index";
 	}
 
+	 private String certified_key() {
+			Random random = new Random();
+			StringBuffer sb = new StringBuffer();
+			int num = 0;
+
+			do {
+				num = random.nextInt(75) + 48;
+				if ((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
+					sb.append((char) num);
+				} else {
+					continue;
+				}
+
+			} while (sb.length() < 10);
+			return sb.toString();
+		}
 
 }
 

@@ -29,12 +29,20 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="./index.html">홈화면</a></li>
                         <li class="nav-item"><a class="nav-link" href="./portfolio-overview.html">카테고리</a></li>
                         <li class="nav-item"><a class="nav-link" href="./faq.html">부가서비스</a></li>
+                                                <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                                    <li><a class="dropdown-item" href="javascript:notice();">공지사항</a></li>
+                                    <li><a class="dropdown-item" href="javascript:proposal();">건의사항</a></li>
+                                </ul>
+                            </li>
                         <c:choose>
                             <c:when test="${loginSign eq 'Y' }">
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">${session}님</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                                     <li><a class="dropdown-item" href="javascript:logout();">로그아웃</a></li>
+                                    <li><a class="dropdown-item" href="javascript:myinfo();">내정보</a></li>
                                 </ul>
                             </li>
                             </c:when>

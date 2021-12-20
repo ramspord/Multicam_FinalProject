@@ -1,20 +1,12 @@
 $(document).ready(function(){
-	
-/*	const id=$.cookie("id");
-	if(id){
-		$("#loginform").html(id+" login ok <button id='logoutBtn'>로그아웃</button>");
-	}*/
-		
-	
-	
-	
+
 	$("#loginBtn").click(function(){
 		const id=$("#id").val();
 		const pw=$("#pw").val();
 		
 		//alert(id+":"+pw);
 		
-		$.post('../login', {id,pw}, function(data){
+		$.post('../../login', {id,pw}, function(data){
 			data=JSON.parse(data);
 			if(data.id){
 				$("#login").html(data.id+" login ok <button id='logoutBtn'>로그아웃</button>");
@@ -27,7 +19,7 @@ $(document).ready(function(){
 	}); 
 		
 		$(document).on("click", "#logoutBtn", function(){
-			//alert("로그아웃됩니다.");
+			alert("로그아웃됩니다.");
 		$.post('../logout',{},function(data){
 			data=JSON.parse(data);
 			if(data.msg=="ok"){
@@ -167,8 +159,32 @@ function logout(){
 	form.setAttribute("charset","UTF-8");
 	form.setAttribute("method","Post");
 	form.setAttribute("action","logout");
+	alert("로그아웃됩니다.");
 	form.submit();
 }
 
 	
-
+        function category(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "category"); //요청 보낼 주소
+            form.submit();
+        }
+        function notice(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "notice"); //요청 보낼 주소
+            form.submit();
+        }
+        function proposal(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "proposal"); //요청 보낼 주소
+            form.submit();
+        }
