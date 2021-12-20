@@ -2,8 +2,18 @@ package com.example.demo.vo;
 
 public class MemberVO {
 	
-	private String id,pw,name,email,phone_no;
+
+
+	private String id,pw,name,email,phone_no,user_no;
 	private String user_type = "U";
+
+	public String getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(String user_no) {
+		this.user_no = user_no;
+	}
 
 	public String getId() {
 		return id;
@@ -56,18 +66,27 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", phone_no=" + phone_no
-				+ ", user_type=" + user_type + "]";
+				+ ", user_no=" + user_no + ", user_type=" + user_type + "]";
 	}
 
-	public MemberVO(String id, String pw, String name, String email, String phone_no, String user_type) {
+	public MemberVO(String id, String pw, String name, String email, String phone_no, String user_no,
+			String user_type) {
 		super();
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
 		this.email = email;
 		this.phone_no = phone_no;
+		this.user_no = user_no;
 		this.user_type = user_type;
 	}
+
+	public MemberVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 		
 	

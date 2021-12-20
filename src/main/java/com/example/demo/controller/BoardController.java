@@ -21,13 +21,26 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping("registerNotice")
-	public String register(HttpServletRequest request, BoardVO boardVO,ModelMap model) {
+
+	public String registerNotice(HttpServletRequest request, BoardVO boardVO,ModelMap model) {
 		System.out.println("insert");
 		int IDX = boardService.selectIdx();
 		boardVO.setIdx(IDX+1);
 		System.out.println(boardVO);
 		boardService.registerBoard(boardVO);
 		return "notice";
+		}
+	
+	@RequestMapping("registerProposal")
+	public String registerProposal(HttpServletRequest request, BoardVO boardVO,ModelMap model,HttpSession session,MemberVO memberVO) {
+		session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("memberVO");
+		boardVO.setUser_no(memberVO.getUser_no());
+		int IDX = boardService.selectIdx2();
+		boardVO.setIdx(IDX+1);
+		System.out.println(boardVO);
+		boardService.registerProposal(boardVO);
+		return "redirect:/proposal";
 		}
 	
 	@RequestMapping("deleteNotice")
@@ -51,8 +64,13 @@ public class BoardController {
 	public String notice(HttpServletRequest request,HttpSession session,ModelMap model,BoardVO boardVO,MemberVO memberVO) {
 		session = request.getSession();
 		memberVO = (MemberVO) session.getAttribute("memberVO");
+		if(memberVO== null ) {
+			model.addAttribute("loginSign", "N");
+		}else {
+			model.addAttribute("loginSign", "Y");
+			model.addAttribute("session", memberVO);
+		}
 		System.out.println(memberVO);
-		System.out.println("notice.do");
 		List<BoardVO> BoardList = boardService.getBoardList(boardVO);
 		
 		model.addAttribute("memberVO", memberVO);
@@ -64,9 +82,16 @@ public class BoardController {
 	public String proposal(HttpServletRequest request,HttpSession session,ModelMap model,BoardVO boardVO,MemberVO memberVO) {
 		session = request.getSession();
 		memberVO = (MemberVO) session.getAttribute("memberVO");
-		System.out.println(memberVO);
+		if(memberVO== null ) {
+			model.addAttribute("loginSign", "N");
+		}else {
+			model.addAttribute("loginSign", "Y");
+			model.addAttribute("session", memberVO);
+		}
 		System.out.println("proposal.do");
-		List<BoardVO> BoardList = boardService.getBoardList(boardVO);
+		List<BoardVO> BoardList = boardService.getProposalList(boardVO);
+		System.out.println(memberVO);
+		System.out.println(BoardList);
 		
 		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("BoardList", BoardList);
@@ -81,7 +106,8 @@ public class BoardController {
 			model.addAttribute("loginSign", "N");
 		}else {
 			model.addAttribute("loginSign", "Y");
-			model.addAttribute("session", memberVO.getId());
+			model.addAttribute("session", memberVO);
+
 		}
 		return "index";
 	}

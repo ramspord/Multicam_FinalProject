@@ -3,6 +3,17 @@ package com.example.demo.vo;
 import java.time.LocalDateTime;
 
 public class BoardVO {
+
+	private String user_no;
+	
+	public String getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(String user_no) {
+		this.user_no = user_no;
+	}
+
 	/** 번호 (PK) */
 	private int idx;
 
@@ -23,10 +34,12 @@ public class BoardVO {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	@Override
 	public String toString() {
-		return "BoardVO [idx=" + idx + ", title=" + title + ", content=" + content + ", insertTime=" + insertTime
-				+ ", count=" + count + "]";
+		return "BoardVO [user_no=" + user_no + ", idx=" + idx + ", title=" + title + ", content=" + content
+				+ ", insertTime=" + insertTime + ", count=" + count + "]";
+
 	}
 
 	public int getIdx() {
