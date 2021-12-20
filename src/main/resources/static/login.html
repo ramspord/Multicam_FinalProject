@@ -5,29 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content />
         <meta name="author" content />
-        <title>Modern Business - Start Bootstrap Template</title>
+        <meta name = "google-signin-client_id"content = "463425482277-faanimt3ihh4f0e1parmgcdv9tqm8bd7.apps.googleusercontent.com">
+        <title>로그인 페이지</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
+        
 
-  	
-  	</script>        
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-5">
-                <a class="navbar-brand" href="/">Talk Talk</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="container px-5">
+                    <a class="navbar-brand" href="index.html">Talk Talk</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="./index.html">홈</a></li>
                         <li class="nav-item"><a class="nav-link" href="./portfolio-overview.html">카테고리</a></li>
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
@@ -35,11 +33,12 @@
                                     <li><a class="dropdown-item" href="javascript:notice();">공지사항</a></li>
                                     <li><a class="dropdown-item" href="./proposal.html">건의사항</a></li>
                                 </ul>
-                            </li>
-                        <li class="nav-item"><a class="nav-link" href="./login.html">로그인</a></li>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="./faq.html">Q&A</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="./login.html">로그인</a></li>
                     </ul>
                 </div>
-            </div>
+                </div>
             </nav>
             <!-- Page content-->
             <section class="py-5">
@@ -47,8 +46,8 @@
                     <!-- Contact form-->
                     <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
-                            <h1 class="fw-bolder">Get in touch</h1>
-                            <p class="lead fw-normal text-muted mb-0">We'd love to hear from you</p>
+                            <h1 class="fw-bolder">TALK TALK</h1>
+                            <p class="lead fw-normal text-muted mb-0">세상을 바꾸는 힘!</p>
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
@@ -59,43 +58,43 @@
                                 <!-- To make this form functional, sign up at-->
                                 <!-- https://startbootstrap.com/solution/contact-forms-->
                                 <!-- to get an API token!-->
-                                <form action="../login" method="post" class="joinForm">
-                                    <!-- Name input-->
+                                <form id="login" method="post" action="../login">
+                                    <!-- ID input-->
+                                    <div id="loginform">
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="name" type="text" placeholder="Enter your ID..." data-sb-validations="required" name="id"/>
-                                        <label for="name">Enter your ID</label>
-                                        <div class="invalid-feedback" data-sb-feedback="name:required">A ID is required.</div>
+                                        <input class="form-control" id="id" name="id" type="text" placeholder="아이디를 입력해주세요" />
+                                        <label>아이디</label>
+                                       
+                                        
+                                        
                                     </div>
-                                    <!-- Email address input-->
+                                    <!-- Password input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="name" type="text" placeholder="Password" data-sb-validations="required" name="pw" />
-                                        <label for="name">Password</label>
-                                        <div class="invalid-feedback" data-sb-feedback="name:required">A Password is required.</div>
+                                        <input class="form-control" id="pw" name="pw" type="password" placeholder="비밀번호를 입력해주세요"/>
+                                        <label>비밀번호</label>
                                     </div>
-                                    <!-- Submit success message-->
-                                    <!---->
-                                    <!-- This is what your users will see when the form-->
-                                    <!-- has successfully submitted-->
-                                    <div class="d-none" id="submitSuccessMessage">
-                                        <div class="text-center mb-3">
-                                            <div class="fw-bolder">Form submission successful!</div>
-                                            To activate this form, sign up at
-                                            <br />
-                                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                        </div>
-                                    </div>
-                                    <!-- Submit error message-->
-                                    <!---->
-                                    <!-- This is what your users will see when there is-->
-                                    <!-- an error submitting the form-->
-                                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                                   
+                                        
+                                   
+                              
                                     <!-- Submit Button-->
-                                    <div class="d-grid" style="margin-bottom:15px;"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">로그인</button></div>
+                                    
+                                    <a class="d-grid"><button type="submit" class="btn btn-primary btn-lg">로그인</button></a><br>
+                                	
+									
+
+                                    </form>  
                                     <div class="text-center mb-5">
                                             <a class="nav-link" href="./contact.html">회원가입</a>
                                             <a class="nav-link" href="#!">비밀번호 찾기</a>
                                     </div>
-                                </form>
+                                     <div class="text-center mb-5">
+                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-twitter"></i></a>
+                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-facebook"></i></a>
+                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-linkedin"></i></a>
+                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-youtube"></i></a>
+                                    </div>
+                              
                             </div>
                         </div>
                     </div>
@@ -105,12 +104,15 @@
         </main>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; TALK TALK 2021</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="../js/my.js"></script>
+	    <script src="https://apis.google.com/js/platform.js" async defer></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
