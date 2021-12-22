@@ -31,5 +31,17 @@
 		delete from user where id=#{id}
 	</delete>
 	
+	<select id="myInfo" parameterType="memberVO" resultType="memberVO">
+		select * from user where user_no=#{user_no}
+	</select>
+	
+	<update id="myInfo_update" parameterType="memberVO">
+		update user set name=#{name}, email=#{email}, phone_no=#{phone_no}
+		where user_no=#{user_no}
+	</update>
+	
+	<delete id="myInfo_delete" parameterType="memberVO">
+		delete from user where user_no=#{user_no}
+	</delete>
 </mapper>  
 

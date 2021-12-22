@@ -31,6 +31,8 @@ public class CategoryController {
 			model.addAttribute("loginSign", "Y");
 			model.addAttribute("session", memberVO);
 		}
+		model.addAttribute("memberVO", memberVO);
+		
 		List<CategoryVO> List =  categoryService.selectCategory();
 		model.addAttribute("category", List);
 		System.out.println(List);
@@ -54,13 +56,11 @@ public class CategoryController {
 
 		String place = request.getParameter("place");
 		ArrayList<CategoryVO> List =  categoryService.selectCategoryDetail(place,user_no);
-		System.out.println(List);
 		String placeDetail = (String)List.get(0).getPlace();
 		
 		model.addAttribute("placeDetail", placeDetail);
 		model.addAttribute("categoryDetail", List);
-		System.out.println(List);
-		return "categoryDetail";
+		return "../categoryDetail";
 		}
 	
 	@RequestMapping("addUserText")
@@ -70,11 +70,11 @@ public class CategoryController {
 		System.out.println(memberVO);
 		String place = request.getParameter("place");
 		String placeText = request.getParameter("text");
-		categoryVO.setUser_no(memberVO.getUser_no());
+		categoryVO.setUser_no(Integer.parseInt(memberVO.getUser_no()));
 		categoryVO.setPlace(place);
 		categoryVO.setPlace_text(placeText);
 		categoryService.addUserText(categoryVO);
-		return "categoryDetail";
+		return "../categoryDetail";
 		}
 	
 	@RequestMapping("updateUserText")
@@ -84,11 +84,11 @@ public class CategoryController {
 	System.out.println(memberVO);
 	String place = request.getParameter("place");
 	String placeText = request.getParameter("text");
-	categoryVO.setUser_no(memberVO.getUser_no());
+	categoryVO.setUser_no(Integer.parseInt(memberVO.getUser_no()));
 	categoryVO.setPlace(place);
 	categoryVO.setPlace_text(placeText);
 	categoryService.addUserText(categoryVO);
-	return "categoryDetail";
+	return "../categoryDetail";
 	}
 	
 	@RequestMapping("deleteUserText")
@@ -98,10 +98,10 @@ public class CategoryController {
 	String place = request.getParameter("place");
 	String placeText = request.getParameter("text");
 	String user_no = request.getParameter("user_no");
-	categoryVO.setUser_no(user_no);
+	categoryVO.setUser_no(Integer.parseInt(user_no));
 	categoryVO.setPlace(place);
 	categoryVO.setPlace_text(placeText);
 	categoryService.deleteUserText(categoryVO);
-	return "categoryDetail";
+	return "../categoryDetail";
 	}
 }

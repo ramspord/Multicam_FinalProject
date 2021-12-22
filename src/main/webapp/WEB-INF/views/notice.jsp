@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -99,7 +99,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <c:if test="${memberVO.user_type eq 'A' }">
+                                <c:if test="${memberVO.user_type eq 'admin' }">
                                 <a class="btn btn-primary" href="./writeNotice.html">글쓰기</a>
                                 </c:if>
                             </div>

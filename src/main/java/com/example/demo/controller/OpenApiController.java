@@ -20,8 +20,8 @@ public class OpenApiController {
 
 	@RequestMapping("tts")
 	@ResponseBody
-	public String tts(String text) {
-		String name =tts.convertToSoundFileName(text);
+	public String tts(String text,String language) {
+		String name =tts.convertToSoundFileName(text,language);
 		return name;
 	}
 

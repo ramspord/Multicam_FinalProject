@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.demo.dao.AdminPageDAO">
+	<!-- 어드민페이지->게시판관리페이지 리스트 -->
+	<select id="boardList" resultType="BoardVO">	    
+		SELECT NO AS idx, user_no, title, content, count FROM proposal_board
+    </select>    
+    
+    <!-- admin 창에서 멤버삭제 -->
+    <delete id="boardDelete" parameterType="BoardVO">
+	    delete from proposal_board where no=#{idx}
+    </delete>
+    
+    <!-- 어드민페이지->회원관리페이지->회원리스트 불러오기 -->
+    <select id="memberList" resultType="MemberVO">
+	    select * from user
+    </select>
+    
+	 <!-- 어드민페이지->회원관리페이지->수정폼 -->
+    <select id="memberUpdateForm" parameterType="MemberVO" resultType="MemberVO">
+	    SELECT * FROM user WHERE user_no=#{user_no};
+    </select>
+    
+    <!--어드민페이지->멤버관리->업데이트기능-->
+	<update id="memberUpdate" parameterType="memberVO">
+	    update user 
+		set id=#{id}, email=#{email}, phone_no=#{phone_no}, pw=#{pw}
+		where user_no=#{user_no}
+    </update>
+  
+     <!-- admin 창에서 멤버삭제 -->
+     <delete id="memberDelete" parameterType="memberVO">
+	    delete from user where user_no=#{user_no}
+    </delete>	
+    
+    <!-- 어드민페이지->게시판관리페이지 리스트 -->
+	<select id="categoryList" resultType="CategoryVO">
+	    SELECT * FROM category_text where user_no=1;
+    </select>
+    
+    <!-- 어드민페이지 ->카테고리관리->삭제기능 -->
+    <delete id="categoryDelete" parameterType="CategoryVO">
+	    delete from category_text where category_no=#{category_no}
+    </delete>
+    
+	<!-- 어드민페이지->즐겨찾기관리->카테고리추가 -->
+	<insert id="categoryInsert" parameterType="CategoryVO">
+	    insert into category_text(place, place_text, user_no)
+        values(#{place}, #{place_text}, #{user_no})
+    </insert>  
+    
+    <!-- 어드민페이지->즐겨찾기관리->텍스트추가 -->
+	<select id="categoryTextList" resultType="CategoryVO">
+		SELECT distinct place FROM category_text;
+	</select>
+	
+	<insert id="categoryTextInsert" parameterType="CategoryVO">
+	    insert into category_text(place, place_text, user_no)
+        values(#{place}, #{place_text}, #{user_no})
+    </insert>  
+</mapper>

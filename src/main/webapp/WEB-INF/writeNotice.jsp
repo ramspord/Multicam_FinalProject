@@ -39,7 +39,7 @@
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <jsp:include page="nav.jsp" flush="true"/>
+            <jsp:include page="views/nav.jsp" flush="true"/>
 <!--             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
                 <a class="navbar-brand" href="/">Talk Talk</a>

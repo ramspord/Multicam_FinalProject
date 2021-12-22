@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,7 +82,7 @@ public class MemberController {
 				jo.put("id", vo.getId());
 				jo.put("pw", vo.getPw());
 				if(jo.size()>0) {
-					return "redirect:/";	
+					return "redirect:/";
 				}
 			}else {
 				jo.put("msg", "아이디와 비밀번호를 확인해주세요");
@@ -117,8 +119,10 @@ public class MemberController {
 			model.addAttribute("loginSign", "N");
 		}else {
 			model.addAttribute("loginSign", "Y");
-			model.addAttribute("session", memberVO.getId());
+			model.addAttribute("session", memberVO);
 		}
+		
+		model.addAttribute("memberVO", memberVO);
 		return "index";
 	}
 
@@ -138,6 +142,37 @@ public class MemberController {
 			} while (sb.length() < 10);
 			return sb.toString();
 		}
+
+	@RequestMapping("myInfo")
+	public String myInfo(MemberVO memberVO, Model model) {		
+		
+		System.out.println("내정보 보낼값 " +memberVO);
+		List<MemberVO> data = memberService.myInfo(memberVO);
+		model.addAttribute("data", data);
+		
+		System.out.println("받은값 "+ data);
+		
+		return "myInfo";
+	}
+	
+	@RequestMapping("myInfo_Update")
+	public String myInfo_Update(MemberVO memberVO) {
+		
+		System.out.println("내정보수정 값 " + memberVO);
+		memberService.myInfo_update(memberVO);
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping("myInfo_Delete")
+	public String myInfo_Delete(MemberVO memberVO) {
+		
+		System.out.println("삭제할 멤버 값 " + memberVO);
+		memberService.myInfo_delete(memberVO);
+		
+		return "redirect:/";
+	}
+	 
 
 }
 

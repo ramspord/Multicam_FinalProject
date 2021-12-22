@@ -10,7 +10,7 @@
 	</select>
 	
 	<select id="selectCategoryDetail" parameterType="string" resultType="categoryVO">
-			SELECT * FROM category_text WHERE (place= #{place} and user_no = #{user_no}) or (place = #{place} and user_no = 2) order by user_no
+			SELECT * FROM category_text WHERE (place= #{place} and user_no = #{user_no}) or (place = #{place} and user_no = 1) order by user_no
 	</select>
 	
 		<select id="selectCategoryDetailAdmin" parameterType="string" resultType="categoryVO">

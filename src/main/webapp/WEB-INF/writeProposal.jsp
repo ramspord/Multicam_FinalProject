@@ -39,7 +39,7 @@
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <jsp:include page="nav.jsp" flush="true"/>
+            <jsp:include page="views/nav.jsp" flush="true"/>
             <!-- Page content-->
             <section class="py-5">
                 <div class="container px-5">

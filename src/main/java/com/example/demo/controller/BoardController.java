@@ -78,7 +78,7 @@ public class BoardController {
 		
 		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("BoardList", BoardList);
-		return "../notice";
+		return "notice";
 	}
 	
 	@RequestMapping("proposal")
@@ -102,18 +102,6 @@ public class BoardController {
 	}
 	
 
-	@RequestMapping("/")
-	public String main(HttpServletRequest request, HttpSession session, ModelMap model, MemberVO memberVO) {
-		session = request.getSession();
-		memberVO = (MemberVO) session.getAttribute("memberVO");
-		if(memberVO== null ) {
-			model.addAttribute("loginSign", "N");
-		}else {
-			model.addAttribute("loginSign", "Y");
-			model.addAttribute("session", memberVO);
 
-		}
-		return "index";
-	}
 
 }

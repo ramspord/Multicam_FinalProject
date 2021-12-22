@@ -17,73 +17,60 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <style>
+		::-webkit-input-placeholder {
+			text-align: center;
+		}
+	   </style>
+        
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-5">
-                <a class="navbar-brand" href="#!">Talk Talk</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="./index.html">홈화면</a></li>
-                        <li class="nav-item"><a class="nav-link" href="./portfolio-overview.html">카테고리</a></li>
-                        <li class="nav-item"><a class="nav-link" href="./faq.html">부가서비스</a></li>
-                                                <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="javascript:notice();">공지사항</a></li>
-                                    <li><a class="dropdown-item" href="javascript:proposal();">건의사항</a></li>
-                                </ul>
-                            </li>
-                        <c:choose>
-                            <c:when test="${loginSign eq 'Y' }">
-                        <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">${session}님</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="javascript:logout();">로그아웃</a></li>
-                                    <li><a class="dropdown-item" href="javascript:myinfo();">내정보</a></li>
-                                </ul>
-                            </li>
-                            </c:when>
-                            <c:otherwise>
-								<li class="nav-item"><a class="nav-link" href="./login.html">로그인</a></li>                            
-                            </c:otherwise>
-                            </c:choose>
-
-                    </ul>
-                     <input  type="button" value="야간" onclick="
-								var target = document.querySelector('body'); 
-								if(this.value === '야간'){
-								target.style.backgroundColor= 'dimgray';
-								target.style.color='white';
-								this.value ='주간';
-								}else{
-								target.style.backgroundColor= 'white';
-								target.style.color='dimgray';
-								this.value ='야간';
-								}
-						">
-                </div>
-            </div>
-        </nav>
+        <jsp:include page="nav.jsp" flush="true"/>
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
-            <div class="row gx-4 gx-lg-5 align-items-center my-5">
-                <div class="col-lg-7">
-                <textarea class="img-fluid rounded mb-4 mb-lg-0" placeholder=" 글을 작성해주세요"style="width: 100%;height: 9.25em;resize: none;"></textarea>
-                </div>
-                <div class="col-lg-5">
-                    <h3 class="font-weight-light">노크를 하듯 상대방에게 <br><br>Talk Talk</h3>
-                   	<br><br><br><br><br>
-                    <a class="btn btn-primary" href="#!">Text To Speach !</a>
-                    <a class="btn btn-primary" href="#!">언어 전환 </a>
-                </div>
-            </div>
+		<center>
+			<div class="align-items-center my-4">
+				<div class="col-lg-7">
+					<h3 class="font-weight-light">상대방에게 노트하듯 다가가보세요.</h3>
+						<div class="input-div">
+						<form action="../insertBookmark" method="post" enctype="multipart/form-data">
+							<div>
+								<textarea class="img-fluid rounded mb-4 mb-lg-0" autofocus="" placeholder="내용을 입력하세요.(여성)" name="user_text" id="text" maxlength="184" rows="1" cols="184" style="width: 100%; height: 8em; resize: none;" spellcheck="false"></textarea>
+							</div>
+							<input type="submit" value="즐겨찾기 등록" class="btn btn-primary" id="insertBookmark" style="margin-bottom:15px;">
+							</form>
+						</div>
+
+								<button id="ttsBtn"><img src="../images/스피커.png" id="speaker" width="50" onclick="tts();"></button>
+								<button id="translateBtn"><img src="../images/번역.png" id="translate" width="50" onclick="clickTrans();"></button>
+								<!-- <button id="noteBtn"><img src="../images/sex.png" id="note" width="50"></button> --> 
+				</div>
+			</div>
+			</form>
+		</center>
+
             <!-- Call to Action-->
             <div class="card text-white bg-secondary my-5 py-4 text-center">
-                <div class="card-body"><p class="text-white m-0">자주 쓰는 말</p></div>
+                <div class="card-body"> <form action="../bookmarkList" method="post" enctype="multipart/form-data">
+                <input type="submit" class="btn btn-primary" id="bookmarkList" value="즐겨찾기 보기">
+              </form>
+                <c:forEach  var="article" items="${bookmarkList }" varStatus="articleNum" >
+                  <div class="d-flex">
+                                            <div class="flex-shrink-0" style="cursor:pointer;"><i class="bi bi-megaphone"></i></div>
+                                            <div class="ms-3">
+                                                <div class="fw-bold">${article.user_text}   <input type="hidden" value="${article.user_text}" name=text id="text_test">
+                                                
+                                                </div>
+                                            </div>
+                                                <div style="margin-left: auto; text-align: center;">
+                                                <div id="ttsmgphone" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="tts2(this);">소리</div>
+                                                <a href="${path}/deleteBookmark.do?user_text=${article.user_text}" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">삭제</a>
+                                               </div>                                            
+                                        </div>                               
+    </c:forEach>
+                </div>
             </div>
             <!-- Content Row-->
             <div class="row gx-4 gx-lg-5">
@@ -132,6 +119,57 @@
         <script src="js/scripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="js/my.js"></script>
+            	<script type="text/javascript">
+		$(document).ready(function(){
+/* 			$("#ttsBtn").click(function(){
+				const text=$("#text").val();
+				$.post('../tts',{text},function(fileName){
+					//alert(data);
+					const audio=new Audio("../media/"+fileName+".mp3");
+					audio.play();
+				})
+			}); */
+		});
+		function clickTrans(){
+			const placeholder = $('#text').attr("placeholder");
+			if(placeholder == "내용을 입력하세요.(여성)"){
+				$('#text').attr("placeholder", "Please enter your details");					
+			}else{
+				$('#text').attr("placeholder", "내용을 입력하세요.(여성)");
+			}
+		}
+		
+		function tts(btn){
+			const text=$("#text").val();
+			const placeholder = $('#text').attr("placeholder");
+			if(placeholder == "내용을 입력하세요.(여성)"){
+				const language = "ko";
+	 			$.post('../tts',{text,language},function(fileName){
+					//alert(data);
+					const audio=new Audio("../media/"+fileName+".mp3");
+					audio.play();
+					$("#text").val('');
+				}); 			
+			}else{
+				const language = "en";
+	 			$.post('../tts',{text,language},function(fileName){
+					//alert(data);
+					const audio=new Audio("../media/"+fileName+".mp3");
+					audio.play();
+					$("#text").val('');
+				}); 
+			}
+		}
+		function tts2(btn){
+			const text = btn.parentNode.previousElementSibling.firstChild.nextSibling.innerText
+			const language = "ko";
+ 			$.post('../tts',{text,language},function(fileName){
+				//alert(data);
+				const audio=new Audio("../media/"+fileName+".mp3");
+				audio.play();
+			}); 
+		}
+	</script>
         
     </body>
 </html>

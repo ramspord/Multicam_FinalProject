@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,20 @@ public class MemberService {
 	
 	public MemberVO login(MemberVO memberVO) throws DataAccessException{
 		return memberDAO.login(memberVO);
+	}
+
+	public List<MemberVO> myInfo(MemberVO memberVO) throws DataAccessException {
+		return memberDAO.myInfo(memberVO);
+	}
+
+	public void myInfo_update(MemberVO memberVO) throws DataAccessException{
+		memberDAO.myInfo_update(memberVO);
+		
+	}
+
+	public void myInfo_delete(MemberVO memberVO) throws DataAccessException{
+		memberDAO.myInfo_delete(memberVO);
+		
 	}
 
 }
