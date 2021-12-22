@@ -34,6 +34,14 @@
             form.setAttribute("action", "proposal"); //요청 보낼 주소
             form.submit();
         }
+        function admin(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "adminpage_board"); //요청 보낼 주소
+            form.submit();
+        }
         function logout(){
             var form = document.createElement("form");
             document.body.appendChild(form);
@@ -58,6 +66,10 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                                     <li><a class="dropdown-item" href="javascript:notice();">공지사항</a></li>
                                     <li><a class="dropdown-item" href="javascript:proposal();">건의사항</a></li>
+                                    <c:set var="admin" value="${memberVO.user_type }" />
+                                    <c:if test="${admin eq 'admin' }">
+                                    	<li><a class="dropdown-item" href="javascript:admin();">관리자페이지</a></li>
+                                	</c:if>
                                 </ul>
                             </li>
                             <c:choose>

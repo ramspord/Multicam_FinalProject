@@ -13,10 +13,24 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>TALK TALK 메인페이지</title>
+        
+        
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@400&display=swap" rel="stylesheet">
+		<style>
+		.card-title{font-family: 'Dongle', sans-serif; font-size: 40px;}
+		.font-weight-light{font-family: 'Dongle', sans-serif; font-size: 60px;}
+		.card-body{font-family: 'Dongle', sans-serif; font-size: 40px;}
+		
+		::-webkit-input-placeholder {
+			text-align: center;
+		}
+		</style>
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -26,9 +40,8 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="./index.html">홈화면</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
                         <li class="nav-item"><a class="nav-link" href="./portfolio-overview.html">카테고리</a></li>
-                        <li class="nav-item"><a class="nav-link" href="./faq.html">부가서비스</a></li>
                                                 <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
@@ -41,8 +54,8 @@
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">${session}님</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                                    <li><a class="dropdown-item" href="javascript:myinfoform();">내정보</a></li>
                                     <li><a class="dropdown-item" href="javascript:logout();">로그아웃</a></li>
-                                    <li><a class="dropdown-item" href="javascript:myinfo();">내정보</a></li>
                                 </ul>
                             </li>
                             </c:when>
@@ -52,38 +65,33 @@
                             </c:choose>
 
                     </ul>
-                     <input  type="button" value="야간" onclick="
-								var target = document.querySelector('body'); 
-								if(this.value === '야간'){
-								target.style.backgroundColor= 'dimgray';
-								target.style.color='white';
-								this.value ='주간';
-								}else{
-								target.style.backgroundColor= 'white';
-								target.style.color='dimgray';
-								this.value ='야간';
-								}
-						">
                 </div>
             </div>
         </nav>
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
-            <div class="row gx-4 gx-lg-5 align-items-center my-5">
-                <div class="col-lg-7">
-                <textarea class="img-fluid rounded mb-4 mb-lg-0" placeholder=" 글을 작성해주세요"style="width: 100%;height: 9.25em;resize: none;"></textarea>
-                </div>
-                <div class="col-lg-5">
-                    <h3 class="font-weight-light">노크를 하듯 상대방에게 <br><br>Talk Talk</h3>
-                   	<br><br><br><br><br>
-                    <a class="btn btn-primary" href="#!">Text To Speach !</a>
-                    <a class="btn btn-primary" href="#!">언어 전환 </a>
-                </div>
-            </div>
+		<center>
+			<div class="align-items-center my-4">
+				<div class="col-lg-7">
+					<h3 class="font-weight-light">상대방에게 노크하듯 다가가보세요.</h3>
+						<div class="input-div">
+							<div>
+								<textarea class="img-fluid rounded mb-4 mb-lg-0" autofocus="" placeholder="&#13;&#10; &#13;&#10; 내용을 입력하세요." id="text" maxlength="184" rows="1" cols="184" style="width: 100%; height: 8em; resize: none;" spellcheck="false"></textarea>
+							</div>
+						</div>
+
+								<button id="ttsBtn"><img src="../images/스피커.png" id="speaker" width="50"></button>
+								<button id="translateBtn"><img src="../images/번역.png" id="translate" width="50"></button>
+								<button id="noteBtn"><img src="../images/필기.png" id="note" width="50"></button>
+
+				</div>
+			</div>
+		</center>
+
             <!-- Call to Action-->
             <div class="card text-white bg-secondary my-5 py-4 text-center">
-                <div class="card-body"><p class="text-white m-0">자주 쓰는 말</p></div>
+                <div class="card-body"><p class="text-white m-0">즐겨찾기</p></div>
             </div>
             <!-- Content Row-->
             <div class="row gx-4 gx-lg-5">
@@ -132,6 +140,60 @@
         <script src="js/scripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="js/my.js"></script>
+            	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#ttsBtn").click(function(){
+				const text=$("#text").val();
+				$.post('../tts',{text},function(fileName){
+					//alert(data);
+					const audio=new Audio("../media/"+fileName+".mp3");
+					audio.play();
+				})
+			});
+		});
+		
+		function category(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "category"); //요청 보낼 주소
+            form.submit();
+        }
+        function notice(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "notice"); //요청 보낼 주소
+            form.submit();
+        }
+        function proposal(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "proposal"); //요청 보낼 주소
+            form.submit();
+        }
+        function admin(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "adminpage_board"); //요청 보낼 주소
+            form.submit();
+        }
+        function logout(){
+            var form = document.createElement("form");
+            document.body.appendChild(form);
+            form.setAttribute("charset", "UTF-8");
+            form.setAttribute("method", "Post");  //Post 방식
+            form.setAttribute("action", "logout"); //요청 보낼 주소
+            form.submit();
+        }
+        
+	</script>
         
     </body>
 </html>

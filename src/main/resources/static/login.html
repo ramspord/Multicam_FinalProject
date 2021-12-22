@@ -13,7 +13,15 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+		<style>
+		.fw-bolder{font-family: 'Dongle', sans-serif; font-size: 60px;}
+		.lead{font-family: 'Dongle', sans-serif; font-size: 40px;}
+		.h3{font-family: 'Dongle', sans-serif; font-size: 60px;}
+		.naver{text-align: center;}
+		</style>
 
     </head>
     <body class="d-flex flex-column">
@@ -25,7 +33,7 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="./index.html">홈</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/">홈</a></li>
                         <li class="nav-item"><a class="nav-link" href="./portfolio-overview.html">카테고리</a></li>
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
@@ -34,8 +42,8 @@
                                     <li><a class="dropdown-item" href="./proposal.html">건의사항</a></li>
                                 </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="./faq.html">Q&A</a></li>
                         <li class="nav-item"><a class="nav-link active" href="./login.html">로그인</a></li>
+                        
                     </ul>
                 </div>
                 </div>
@@ -80,10 +88,24 @@
                                     <!-- Submit Button-->
                                     
                                     <a class="d-grid"><button type="submit" class="btn btn-primary btn-lg">로그인</button></a><br>
-                                	
-									
 
                                     </form>  
+                                    
+								  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+								  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+       							  
+       							  <div class="naver" id="naver_id_login"></div>
+       							  
+								   <script type="text/javascript">
+								  	var naver_id_login = new naver_id_login("bscIhTw1y70wnr0cRi_i", "http://localhost:8888/callback.html");
+								  	var state = naver_id_login.getUniqState();
+								  	naver_id_login.setButton("green", 3,45);
+								  	naver_id_login.setDomain("http://localhost:8888/login.html");
+								  	naver_id_login.setState(state);
+								  	naver_id_login.setPopup();
+								  	naver_id_login.init_naver_id_login();
+								  </script>
+        
                                     <div class="text-center mb-5">
                                             <a class="nav-link" href="./contact.html">회원가입</a>
                                             <a class="nav-link" href="#!">비밀번호 찾기</a>

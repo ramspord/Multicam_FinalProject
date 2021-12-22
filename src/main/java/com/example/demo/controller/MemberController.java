@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.Random;
 
 import javax.servlet.http.HttpServlet;
 
@@ -12,21 +11,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 
 import com.example.demo.service.MemberService;
 import com.example.demo.service.UserSha256;
 import com.example.demo.vo.MemberVO;
 
+
 @Controller
 public class MemberController {
 	
 	@Autowired
-	MemberService memberService;
+    MemberService memberService;
 	
 	@PostMapping("contact")
 	public String contact(HttpServletRequest request, MemberVO memberVO) {  
@@ -37,7 +40,6 @@ public class MemberController {
 		memberVO.setPw(encryPassword);
 		System.out.println(memberVO.getPw());
 		
-	
 		
 		if(memberVO.getId() ==null || memberVO.getId().equals("") || 
 				memberVO.getPw()==null || memberVO.getPw().equals("") 
@@ -49,6 +51,7 @@ public class MemberController {
 		
 		try {
 			memberService.contact(memberVO);
+			
 			return "index";
 		}catch(DataAccessException e) {
 			System.out.println(e.getMessage());
@@ -122,22 +125,8 @@ public class MemberController {
 		return "index";
 	}
 
-	 private String certified_key() {
-			Random random = new Random();
-			StringBuffer sb = new StringBuffer();
-			int num = 0;
+	
 
-			do {
-				num = random.nextInt(75) + 48;
-				if ((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
-					sb.append((char) num);
-				} else {
-					continue;
-				}
-
-			} while (sb.length() < 10);
-			return sb.toString();
-		}
 
 }
 

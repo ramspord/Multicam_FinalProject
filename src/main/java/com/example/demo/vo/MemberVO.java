@@ -2,10 +2,10 @@ package com.example.demo.vo;
 
 public class MemberVO {
 
-	private String user;
+	
 	private String id,pw,name,email,phone_no,user_no;
 	private String user_type = "U";
-	private String certified;
+	private String authkey;
 
 	public String getUser_no() {
 		return user_no;
@@ -55,13 +55,6 @@ public class MemberVO {
 		this.phone_no = phone_no;
 	}
 
-	 public String getCertified() {
-			return certified;
-	}
-
-		public void setCertified(String certified) {
-			this.certified = certified;
-	}
 	
 	public String getUser_type() {
 		return user_type;
@@ -74,11 +67,11 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", phone_no=" + phone_no
-				+ ", user_no=" + user_no + ", certified=" + certified +", user_type=" + user_type + "]";
+				+ ", user_no=" + user_no + ", user_type=" + user_type + "]";
 	}
 
 	public MemberVO(String id, String pw, String name, String email, String phone_no, String user_no,
-			String user_type, String certified) {
+			String user_type) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -87,7 +80,7 @@ public class MemberVO {
 		this.phone_no = phone_no;
 		this.user_no = user_no;
 		this.user_type = user_type;
-		this.certified = certified;
+
 	}
 
 	public MemberVO() {

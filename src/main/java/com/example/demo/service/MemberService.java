@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class MemberService {
 	public MemberVO login(MemberVO memberVO) throws DataAccessException{
 		return memberDAO.login(memberVO);
 	}
+
 
 }
 

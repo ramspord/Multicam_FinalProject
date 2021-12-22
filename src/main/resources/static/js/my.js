@@ -39,7 +39,7 @@ $(document).ready(function(){
 				$("#id_check").text('');
 			}else {
 				$('#id_check').text('아이디는 4~20자리로 첫 글자 숫자가 불가합니다.');
-				$('#id_check').css('color','blue');
+				$('#id_check').css('color','red');
 			}
 		});*/
 
@@ -91,7 +91,7 @@ $(document).ready(function(){
 				console.log(phonenoJ.test($(this).val()));
 				$("#phoneno_check").text('');
 			}else {
-				$('#phoneno_check').text('전화번호 형식으로 입력해주세요 ex. 010-1234-5678');
+				$('#phoneno_check').text('숫자만 입력해주세요 ex. 01012345678');
 				$('#phoneno_check').css('color','blue');
 			}
 		});
@@ -142,7 +142,7 @@ $(document).ready(function(){
 		}
 		
 		if(validAll){ // 유효성 모두 통과
-			alert('회원가입이 정상적으로 처리되었습니다');
+			alert('회원가입 되었습니다!');
 			
 		} else{
 			alert('입력 정보를 확인해주세요')
@@ -159,7 +159,7 @@ function logout(){
 	form.setAttribute("charset","UTF-8");
 	form.setAttribute("method","Post");
 	form.setAttribute("action","logout");
-	alert("로그아웃됩니다.");
+	alert("로그아웃되었습니다.");
 	form.submit();
 }
 
@@ -188,3 +188,6 @@ function logout(){
             form.setAttribute("action", "proposal"); //요청 보낼 주소
             form.submit();
         }
+
+        
+      
