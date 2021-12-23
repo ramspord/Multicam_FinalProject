@@ -36,7 +36,7 @@
 	</select>
 	
 	<update id="myInfo_update" parameterType="memberVO">
-		update user set name=#{name}, email=#{email}, phone_no=#{phone_no}
+		update user set name=#{name}, email=#{email}, pw=#{pw}, phone_no=#{phone_no}
 		where user_no=#{user_no}
 	</update>
 	

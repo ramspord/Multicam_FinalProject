@@ -40,7 +40,7 @@
 								<textarea class="img-fluid rounded mb-4 mb-lg-0" autofocus="" placeholder="내용을 입력하세요.(여성)" name="user_text" id="text" maxlength="184" rows="1" cols="184" style="width: 100%; height: 8em; resize: none;" spellcheck="false"></textarea>
 							</div>
 							<input type="submit" value="즐겨찾기 등록" class="btn btn-primary" id="insertBookmark" style="margin-bottom:15px;">
-							</form>
+						</form>
 						</div>
 
 								<button id="ttsBtn"><img src="../images/스피커.png" id="speaker" width="50" onclick="tts();"></button>
@@ -53,22 +53,23 @@
 
             <!-- Call to Action-->
             <div class="card text-white bg-secondary my-5 py-4 text-center">
-                <div class="card-body"> <form action="../bookmarkList" method="post" enctype="multipart/form-data">
-                <input type="submit" class="btn btn-primary" id="bookmarkList" value="즐겨찾기 보기">
-              </form>
+                <div class="card-body">
+                 <form action="../bookmarkList" method="post" enctype="multipart/form-data">
+               		 <input type="submit" class="btn btn-primary" id="bookmarkList" value="즐겨찾기 보기">
+             	 </form>
                 <c:forEach  var="article" items="${bookmarkList }" varStatus="articleNum" >
                   <div class="d-flex">
-                                            <div class="flex-shrink-0" style="cursor:pointer;"><i class="bi bi-megaphone"></i></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">${article.user_text}   <input type="hidden" value="${article.user_text}" name=text id="text_test">
-                                                
-                                                </div>
-                                            </div>
-                                                <div style="margin-left: auto; text-align: center;">
-                                                <div id="ttsmgphone" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="tts2(this);">소리</div>
-                                                <a href="${path}/deleteBookmark.do?user_text=${article.user_text}" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">삭제</a>
-                                               </div>                                            
-                                        </div>                               
+                      <div class="flex-shrink-0" style="cursor:pointer;"><i class="bi bi-megaphone"></i></div>
+                      <div class="ms-3">
+                          <div class="fw-bold">${article.user_text}   <input type="hidden" value="${article.user_text}" name=text id="text_test">
+                          
+                          </div>
+                      </div>
+                          <div style="margin-left: auto; text-align: center;">
+                          <div id="ttsmgphone" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="tts2(this);">소리</div>
+                          <a href="${path}/deleteBookmark.do?user_text=${article.user_text}" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">삭제</a>
+                         </div>                                            
+                  </div>                               
     </c:forEach>
                 </div>
             </div>

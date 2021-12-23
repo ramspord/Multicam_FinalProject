@@ -54,7 +54,7 @@
                                     </div>
                                     <!-- Email address input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="pw" type="password" value="${data[0].pw }" />
+                                        <input class="form-control" id="pw" type="password" value="" />
                                     	<label for="password">Password</label>
                                     </div>
                                     <div class="form-floating mb-3">

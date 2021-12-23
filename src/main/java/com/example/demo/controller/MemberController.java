@@ -159,6 +159,11 @@ public class MemberController {
 	public String myInfo_Update(MemberVO memberVO) {
 		
 		System.out.println("내정보수정 값 " + memberVO);
+		
+		String encryPassword = UserSha256.encrypt(memberVO.getPw());
+		memberVO.setPw(encryPassword);
+		System.out.println("변경할 비밀번호 : " +memberVO.getPw());
+		
 		memberService.myInfo_update(memberVO);
 		
 		return "redirect:/";
