@@ -49,7 +49,7 @@
 								<thead>
 								<tr>
 									<th>번호</th>
-									<th>아이디</th>
+									<th>유저no</th>
 									<th>제목</th>
 									<th>내용</th>
 									<th>조회수</th>

@@ -50,9 +50,8 @@
                           	  
                           	  	<select style="width:100px; display:inline;" class="form-select form-select-sm" name="selectbox" aria-label=".form-select-sm example">
 									<option selected>전체</option>
-								    <option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+								    <option value="1">상황</option>
+									<option value="2">메시지</option>
 							  	</select>
 							  	<input type="text" style="width:200px; display:inline; height:30px; font-size:20px;" >
 							</h2>
