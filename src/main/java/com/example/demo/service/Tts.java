@@ -22,7 +22,7 @@ public class Tts {
 	@Value("${naverAi.clientSecret}")
 	private String clientSecret;
 
- public String convertToSoundFileName(String text) {
+ public String convertToSoundFileName(String text,String language) {
      
      try {
          text = URLEncoder.encode(text, "UTF-8"); // 13자
@@ -33,7 +33,12 @@ public class Tts {
          con.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clientId);
          con.setRequestProperty("X-NCP-APIGW-API-KEY", clientSecret);
          // post request
-         String postParams = "speaker=njihwan&volume=0&speed=0&pitch=0&format=mp3&text=" + text;
+         String postParams ="";
+         if(language.equals("ko")){
+        	 postParams = "speaker=nara&volume=0&speed=0&pitch=0&format=mp3&text=" + text;        	 
+         }else {
+        	 postParams = "speaker=clara&volume=0&speed=0&pitch=0&format=mp3&text=" + text;
+         }
          con.setDoOutput(true);
          DataOutputStream wr = new DataOutputStream(con.getOutputStream());
          wr.writeBytes(postParams);

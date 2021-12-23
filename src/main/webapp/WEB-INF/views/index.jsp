@@ -34,6 +34,7 @@
     </head>
     <body>
         <!-- Responsive navbar-->
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
                 <a class="navbar-brand" href="#!">Talk Talk</a>
@@ -68,6 +69,7 @@
                 </div>
             </div>
         </nav>
+        <jsp:include page="nav.jsp" flush="true"/>
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
@@ -87,11 +89,47 @@
 
 				</div>
 			</div>
+					<h3 class="font-weight-light">상대방에게 노트하듯 다가가보세요.</h3>
+						<div class="input-div">
+						<form action="../insertBookmark" method="post" enctype="multipart/form-data">
+							<div>
+								<textarea class="img-fluid rounded mb-4 mb-lg-0" autofocus="" placeholder="내용을 입력하세요.(여성)" name="user_text" id="text" maxlength="184" rows="1" cols="184" style="width: 100%; height: 8em; resize: none;" spellcheck="false"></textarea>
+							</div>
+							<input type="submit" value="즐겨찾기 등록" class="btn btn-primary" id="insertBookmark" style="margin-bottom:15px;">
+						</form>
+						</div>
+
+								<button id="ttsBtn"><img src="../images/스피커.png" id="speaker" width="50" onclick="tts();"></button>
+								<button id="translateBtn"><img src="../images/번역.png" id="translate" width="50" onclick="clickTrans();"></button>
+						
+				</div>
+			</div>
+			</form>
+
 		</center>
 
             <!-- Call to Action-->
             <div class="card text-white bg-secondary my-5 py-4 text-center">
                 <div class="card-body"><p class="text-white m-0">즐겨찾기</p></div>
+                <div class="card-body">
+                 <form action="../bookmarkList" method="post" enctype="multipart/form-data">
+               		 <input type="submit" class="btn btn-primary" id="bookmarkList" value="즐겨찾기 보기">
+             	 </form>
+                <c:forEach  var="article" items="${bookmarkList }" varStatus="articleNum" >
+                  <div class="d-flex">
+                      <div class="flex-shrink-0" style="cursor:pointer;"><i class="bi bi-megaphone"></i></div>
+                      <div class="ms-3">
+                          <div class="fw-bold">${article.user_text}   <input type="hidden" value="${article.user_text}" name=text id="text_test">
+                          
+                          </div>
+                      </div>
+                          <div style="margin-left: auto; text-align: center;">
+                          <div id="ttsmgphone" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="tts2(this);">소리</div>
+                          <a href="${path}/deleteBookmark.do?user_text=${article.user_text}" class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;">삭제</a>
+                         </div>                                            
+                  </div>                               
+    </c:forEach>
+                </div>
             </div>
             <!-- Content Row-->
             <div class="row gx-4 gx-lg-5">
@@ -193,6 +231,46 @@
             form.submit();
         }
         
+		});
+		function clickTrans(){
+			const placeholder = $('#text').attr("placeholder");
+			if(placeholder == "내용을 입력하세요.(여성)"){
+				$('#text').attr("placeholder", "Please enter your details");					
+			}else{
+				$('#text').attr("placeholder", "내용을 입력하세요.(여성)");
+			}
+		}
+		
+		function tts(btn){
+			const text=$("#text").val();
+			const placeholder = $('#text').attr("placeholder");
+			if(placeholder == "내용을 입력하세요.(여성)"){
+				const language = "ko";
+	 			$.post('../tts',{text,language},function(fileName){
+					//alert(data);
+					const audio=new Audio("../media/"+fileName+".mp3");
+					audio.play();
+					$("#text").val('');
+				}); 			
+			}else{
+				const language = "en";
+	 			$.post('../tts',{text,language},function(fileName){
+					//alert(data);
+					const audio=new Audio("../media/"+fileName+".mp3");
+					audio.play();
+					$("#text").val('');
+				}); 
+			}
+		}
+		function tts2(btn){
+			const text = btn.parentNode.previousElementSibling.firstChild.nextSibling.innerText
+			const language = "ko";
+ 			$.post('../tts',{text,language},function(fileName){
+				//alert(data);
+				const audio=new Audio("../media/"+fileName+".mp3");
+				audio.play();
+			}); 
+		}
 	</script>
         
     </body>

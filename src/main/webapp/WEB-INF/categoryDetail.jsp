@@ -20,8 +20,35 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+ 		$(document).ready(function(){
+/* 			$("#ttsmgphone").click(function(){
+				const text=$("#ttsmgphone").parent().next().children().first().text();
+				//alert(text);
+				$.post('../tts',{text},function(fileName){
+					//alert(data);
+					const audio=new Audio("../media/"+fileName+".mp3");
+					audio.play();
+				})
+			}); */
+		}); 
+		
+		function tts(btn){
+			const text = btn.parentNode.nextSibling.nextSibling.firstChild.nextSibling.innerText;
+			const language = "ko";
+ 			$.post('../tts',{text,language},function(fileName){
+				//alert(data);
+				const audio=new Audio("../media/"+fileName+".mp3");
+				audio.play();
+			}); 
+		}
+	</script>
+    
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
+<<<<<<< HEAD
             <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
@@ -57,6 +84,10 @@
                 </div>
             </div>
         </nav>
+=======
+            <!-- Navigation-->
+            <jsp:include page="views/nav.jsp" flush="true"/>
+>>>>>>> branch 'TestMaster' of https://github.com/LYHTemptation/Multicam_FinalProject.git
             <!-- Page Content-->
             <section class="py-5">
                 <div class="container px-5 my-5">
@@ -123,14 +154,15 @@
                                         <!-- Single comment-->
                                         <c:forEach var="categoryDetail" items="${categoryDetail}" varStatus="status">
                                         <div class="d-flex">
-                                            <div class="flex-shrink-0" style="cursor:pointer;"><i class="bi bi-megaphone"></i></div>
+                                            <div class="flex-shrink-0" style="cursor:pointer;"><i class="bi bi-megaphone" id="ttsmgphone" onclick="tts(this);"></i></div>
                                             <div class="ms-3">
                                                 <div class="fw-bold">${categoryDetail.place_text}
+                                                <input type="hidden" value="${categoryDetail.place_text}" id="text_test">
                                                 </div>
                                             </div>
                                             <c:if test="${session.user_no eq 2 ||categoryDetail.user_no eq session.user_no}">
                                             	<div style="margin-left: auto; text-align: center;">
-                                                <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="updateUserText(this);">수정</div>
+                                                <!-- <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="updateUserText(this);">수정</div> -->
                                                 <div class="badge bg-primary bg-gradient rounded-pill mb-2" style="cursor:pointer;" onclick="deleteUserText(this);">삭제</div>
                                                 </div>
                                             </c:if>

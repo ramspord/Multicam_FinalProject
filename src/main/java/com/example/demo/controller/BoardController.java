@@ -78,7 +78,7 @@ public class BoardController {
 		
 		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("BoardList", BoardList);
-		return "../notice";
+		return "notice";
 	}
 	
 	@RequestMapping("proposal")

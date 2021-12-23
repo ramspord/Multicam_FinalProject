@@ -38,6 +38,7 @@
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
+<<<<<<< HEAD
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
                 <a class="navbar-brand" href="/">Talk Talk</a>
@@ -74,6 +75,10 @@
                 </div>
             </div>
         </nav>
+=======
+            <!-- Navigation-->
+            <jsp:include page="views/nav.jsp" flush="true"/>
+>>>>>>> branch 'TestMaster' of https://github.com/LYHTemptation/Multicam_FinalProject.git
             <!-- Page content-->
             <section class="py-5">
                 <div class="container px-5">

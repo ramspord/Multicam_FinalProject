@@ -38,7 +38,13 @@
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
+<<<<<<< HEAD
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+=======
+            <!-- Navigation-->
+            <jsp:include page="views/nav.jsp" flush="true"/>
+<!--             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+>>>>>>> branch 'TestMaster' of https://github.com/LYHTemptation/Multicam_FinalProject.git
             <div class="container px-5">
                 <a class="navbar-brand" href="/">Talk Talk</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
