@@ -30,7 +30,7 @@ public class MemberController {
 	@PostMapping("contact")
 	public String contact(HttpServletRequest request, MemberVO memberVO) {  
 		
-		System.out.println("회원가입 폼 넘어온 값 "+memberVO);
+		System.out.println("회원가입 폼 넘어온 값ㅇ "+memberVO);
 		
 		String encryPassword = UserSha256.encrypt(memberVO.getPw());
 		memberVO.setPw(encryPassword);
