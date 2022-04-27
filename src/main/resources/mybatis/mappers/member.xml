@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.demo.dao.MemberDAO">
+
+	<select id="login" parameterType="memberVO" resultType="memberVO">
+		select * from user where id=#{id} and pw=#{pw}
+	</select>
+
+	<select id="selectAllMember" resultType="memberVO">
+		select * from user
+	</select>
+	
+
+	 <select id="idCheck" parameterType="String" resultType="int">
+        SELECT COUNT(id) FROM USER WHERE id= #{id}
+     </select>
+	
+	<insert id="insertMember" parameterType="memberVO">
+		insert into user(id,pw,name,email,phone_no)
+		values(#{id},#{pw},#{name},#{email},#{phone_no})
+	</insert>
+	
+	<update id="updateMemberPw" parameterType="memberVO">
+		update user set pw=#{pw} where id=#{id}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		delete from user where id=#{id}
+	</delete>
+	
+	<select id="myInfo" parameterType="memberVO" resultType="memberVO">
+		select * from user where user_no=#{user_no}
+	</select>
+	
+	<update id="myInfo_update" parameterType="memberVO">
+		update user set name=#{name}, email=#{email}, phone_no=#{phone_no}
+		where user_no=#{user_no}
+	</update>
+	
+	<delete id="myInfo_delete" parameterType="memberVO">
+		delete from user where user_no=#{user_no}
+	</delete>
+</mapper>  
+

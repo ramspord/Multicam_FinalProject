@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.BookmarkDAO">
+
+<insert parameterType="bookmarkVO" id="insertBookmark"> insert into bookmark_text(user_text,count,id) values(#{user_text},1,#{id}) </insert>
+
+<select parameterType="bookmarkVO" id="selectCountByUser_text" resultType="int">select count from bookmark_text where user_text=#{user_text} and id=#{id}</select>
+
+<update parameterType="bookmarkVO" id="updateCountByUser_text">update bookmark_text set count=#{count} where user_text=#{user_text} and id=#{id} </update>
+
+<select id="bookmarkList" resultType="bookmarkVO"> select * from bookmark_text </select>
+
+<delete parameterType="bookmarkVO" id="deleteBookmark"> delete from bookmark_text where user_text=#{user_text} </delete>
+
+</mapper>
